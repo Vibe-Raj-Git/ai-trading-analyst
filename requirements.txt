@@ -9,4 +9,3 @@ ta==0.10.2
 pyotp==2.8.0
 fpdf==1.7.2
 openpyxl==3.1.2
-Werkzeug==2.3.0
