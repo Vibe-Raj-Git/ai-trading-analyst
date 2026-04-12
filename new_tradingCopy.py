@@ -1586,14 +1586,14 @@ def convert_frequency_code(rule: str) -> str:
     Old → New mapping:
     T (minute) → min
     H (hour) → h
-    M (month) → ME (month end)
-    Q (quarter) → QE (quarter end)
+    M (month) → M (month end)
+    Q (quarter) → Q (quarter end)
     """
     freq_map = {
         'T': 'min',
         'H': 'h',
-        'M': 'ME',
-        'Q': 'QE',
+        'M': 'M',
+        'Q': 'Q',
     }
     
     # Replace deprecated codes
@@ -1714,7 +1714,7 @@ def resample_to_quarterly(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return df
 
-    q = df.resample("QE").agg({
+    q = df.resample("Q").agg({
         "open": "first",
         "high": "max",
         "low": "min",
