@@ -1,0 +1,2126 @@
+{
+  "MARUTI": {
+    "instrument_key": "NSE_EQ|INE585B01010",
+    "isin": "INE585B01010",
+    "name": "MARUTI SUZUKI INDIA LTD.",
+    "primary_index": "NIFTYAUTO"
+  },
+  "NATIONALUM": {
+    "instrument_key": "NSE_EQ|INE139A01034",
+    "isin": "INE139A01034",
+    "name": "NATIONAL ALUMINIUM CO LTD",
+    "primary_index": "NIFTYMETAL"
+  },
+  "ENRIN": {
+    "instrument_key": "NSE_EQ|INE1NPP01017",
+    "isin": "INE1NPP01017",
+    "name": "SIEMENS ENERGY INDIA LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "BAJAJ-AUTO": {
+    "instrument_key": "NSE_EQ|INE917I01010",
+    "isin": "INE917I01010",
+    "name": "BAJAJ AUTO LIMITED",
+    "primary_index": "NIFTYAUTO"
+  },
+  "HINDZINC": {
+    "instrument_key": "NSE_EQ|INE267A01025",
+    "isin": "INE267A01025",
+    "name": "HINDUSTAN ZINC LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "360ONE": {
+    "instrument_key": "NSE_EQ|INE466L01038",
+    "isin": "INE466L01038",
+    "name": "360 ONE WAM LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "SHREECEM": {
+    "instrument_key": "NSE_EQ|INE070A01015",
+    "isin": "INE070A01015",
+    "name": "SHREE CEMENT LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "JINDALSTEL": {
+    "instrument_key": "NSE_EQ|INE749A01030",
+    "isin": "INE749A01030",
+    "name": "JINDAL STEEL LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "BDL": {
+    "instrument_key": "NSE_EQ|INE171Z01026",
+    "isin": "INE171Z01026",
+    "name": "BHARAT DYNAMICS LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "COFORGE": {
+    "instrument_key": "NSE_EQ|INE591G01025",
+    "isin": "INE591G01025",
+    "name": "COFORGE LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "PNB": {
+    "instrument_key": "NSE_EQ|INE160A01022",
+    "isin": "INE160A01022",
+    "name": "PUNJAB NATIONAL BANK",
+    "primary_index": "NIFTYBANK"
+  },
+  "ADANIPOWER": {
+    "instrument_key": "NSE_EQ|INE814H01029",
+    "isin": "INE814H01029",
+    "name": "ADANI POWER LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "GODREJCP": {
+    "instrument_key": "NSE_EQ|INE102D01028",
+    "isin": "INE102D01028",
+    "name": "GODREJ CONSUMER PRODUCTS",
+    "primary_index": "NIFTYFMCG"
+  },
+  "PFC": {
+    "instrument_key": "NSE_EQ|INE134E01011",
+    "isin": "INE134E01011",
+    "name": "POWER FIN CORP LTD.",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "INFY": {
+    "instrument_key": "NSE_EQ|INE009A01021",
+    "isin": "INE009A01021",
+    "name": "INFOSYS LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "BIOCON": {
+    "instrument_key": "NSE_EQ|INE376G01013",
+    "isin": "INE376G01013",
+    "name": "BIOCON LIMITED.",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "PATANJALI": {
+    "instrument_key": "NSE_EQ|INE619A01035",
+    "isin": "INE619A01035",
+    "name": "PATANJALI FOODS LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "BHARATFORG": {
+    "instrument_key": "NSE_EQ|INE465A01025",
+    "isin": "INE465A01025",
+    "name": "BHARAT FORGE LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "ALKEM": {
+    "instrument_key": "NSE_EQ|INE540L01014",
+    "isin": "INE540L01014",
+    "name": "ALKEM LABORATORIES LTD.",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "KOTAKBANK": {
+    "instrument_key": "NSE_EQ|INE237A01028",
+    "isin": "INE237A01028",
+    "name": "KOTAK MAHINDRA BANK LTD",
+    "primary_index": "NIFTYBANK"
+  },
+  "DIVISLAB": {
+    "instrument_key": "NSE_EQ|INE361B01024",
+    "isin": "INE361B01024",
+    "name": "DIVI S LABORATORIES LTD",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "PRESTIGE": {
+    "instrument_key": "NSE_EQ|INE811K01011",
+    "isin": "INE811K01011",
+    "name": "PRESTIGE ESTATE LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "VMM": {
+    "instrument_key": "NSE_EQ|INE01EA01019",
+    "isin": "INE01EA01019",
+    "name": "VISHAL MEGA MART LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "HINDUNILVR": {
+    "instrument_key": "NSE_EQ|INE030A01027",
+    "isin": "INE030A01027",
+    "name": "HINDUSTAN UNILEVER LTD.",
+    "primary_index": "NIFTYFMCG"
+  },
+  "CANBK": {
+    "instrument_key": "NSE_EQ|INE476A01022",
+    "isin": "INE476A01022",
+    "name": "CANARA BANK",
+    "primary_index": "NIFTYBANK"
+  },
+  "SHRIRAMFIN": {
+    "instrument_key": "NSE_EQ|INE721A01047",
+    "isin": "INE721A01047",
+    "name": "SHRIRAM FINANCE LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "BANKBARODA": {
+    "instrument_key": "NSE_EQ|INE028A01039",
+    "isin": "INE028A01039",
+    "name": "BANK OF BARODA",
+    "primary_index": "NIFTYBANK"
+  },
+  "LODHA": {
+    "instrument_key": "NSE_EQ|INE670K01029",
+    "isin": "INE670K01029",
+    "name": "LODHA DEVELOPERS LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "HEROMOTOCO": {
+    "instrument_key": "NSE_EQ|INE158A01026",
+    "isin": "INE158A01026",
+    "name": "HERO MOTOCORP LIMITED",
+    "primary_index": "NIFTYAUTO"
+  },
+  "SBILIFE": {
+    "instrument_key": "NSE_EQ|INE123W01016",
+    "isin": "INE123W01016",
+    "name": "SBI LIFE INSURANCE CO LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "TATACONSUM": {
+    "instrument_key": "NSE_EQ|INE192A01025",
+    "isin": "INE192A01025",
+    "name": "TATA CONSUMER PRODUCT LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "BAJAJHLDNG": {
+    "instrument_key": "NSE_EQ|INE118A01012",
+    "isin": "INE118A01012",
+    "name": "BAJAJ HOLDINGS & INVS LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "ABCAPITAL": {
+    "instrument_key": "NSE_EQ|INE674K01013",
+    "isin": "INE674K01013",
+    "name": "ADITYA BIRLA CAPITAL LTD.",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "HINDPETRO": {
+    "instrument_key": "NSE_EQ|INE094A01015",
+    "isin": "INE094A01015",
+    "name": "HINDUSTAN PETROLEUM CORP",
+    "primary_index": "NIFTY INFRA"
+  },
+  "YESBANK": {
+    "instrument_key": "NSE_EQ|INE528G01035",
+    "isin": "INE528G01035",
+    "name": "YES BANK LIMITED",
+    "primary_index": "NIFTYBANK"
+  },
+  "OBEROIRLTY": {
+    "instrument_key": "NSE_EQ|INE093I01010",
+    "isin": "INE093I01010",
+    "name": "OBEROI REALTY LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "SONACOMS": {
+    "instrument_key": "NSE_EQ|INE073K01018",
+    "isin": "INE073K01018",
+    "name": "SONA BLW PRECISION FRGS L",
+    "primary_index": "NIFTYAUTO"
+  },
+  "ASTRAL": {
+    "instrument_key": "NSE_EQ|INE006I01046",
+    "isin": "INE006I01046",
+    "name": "ASTRAL LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "TATATECH": {
+    "instrument_key": "NSE_EQ|INE142M01025",
+    "isin": "INE142M01025",
+    "name": "TATA TECHNOLOGIES LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "COROMANDEL": {
+    "instrument_key": "NSE_EQ|INE169A01031",
+    "isin": "INE169A01031",
+    "name": "COROMANDEL INTERNTL. LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "TRENT": {
+    "instrument_key": "NSE_EQ|INE849A01020",
+    "isin": "INE849A01020",
+    "name": "TRENT LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "TECHM": {
+    "instrument_key": "NSE_EQ|INE669C01036",
+    "isin": "INE669C01036",
+    "name": "TECH MAHINDRA LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "MCX": {
+    "instrument_key": "NSE_EQ|INE745G01043",
+    "isin": "INE745G01043",
+    "name": "MULTI COMMODITY EXCHANGE",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "BRITANNIA": {
+    "instrument_key": "NSE_EQ|INE216A01030",
+    "isin": "INE216A01030",
+    "name": "BRITANNIA INDUSTRIES LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "CONCOR": {
+    "instrument_key": "NSE_EQ|INE111A01025",
+    "isin": "INE111A01025",
+    "name": "CONTAINER CORP OF IND LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "SBIN": {
+    "instrument_key": "NSE_EQ|INE062A01020",
+    "isin": "INE062A01020",
+    "name": "STATE BANK OF INDIA",
+    "primary_index": "NIFTYBANK"
+  },
+  "TATASTEEL": {
+    "instrument_key": "NSE_EQ|INE081A01020",
+    "isin": "INE081A01020",
+    "name": "TATA STEEL LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "MRF": {
+    "instrument_key": "NSE_EQ|INE883A01011",
+    "isin": "INE883A01011",
+    "name": "MRF LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "WIPRO": {
+    "instrument_key": "NSE_EQ|INE075A01022",
+    "isin": "INE075A01022",
+    "name": "WIPRO LTD",
+    "primary_index": "NIFTYIT"
+  },
+  "LTF": {
+    "instrument_key": "NSE_EQ|INE498L01015",
+    "isin": "INE498L01015",
+    "name": "L&T FINANCE LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "WAAREEENER": {
+    "instrument_key": "NSE_EQ|INE377N01017",
+    "isin": "INE377N01017",
+    "name": "WAAREE ENERGIES LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "GODREJPROP": {
+    "instrument_key": "NSE_EQ|INE484J01027",
+    "isin": "INE484J01027",
+    "name": "GODREJ PROPERTIES LTD",
+    "primary_index": "NIFTYREALTY"
+  },
+  "VEDL": {
+    "instrument_key": "NSE_EQ|INE205A01025",
+    "isin": "INE205A01025",
+    "name": "VEDANTA LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "MAXHEALTH": {
+    "instrument_key": "NSE_EQ|INE027H01010",
+    "isin": "INE027H01010",
+    "name": "MAX HEALTHCARE INS LTD",
+    "primary_index": "NIFTYHEALTHCARE"
+  },
+  "CHOLAFIN": {
+    "instrument_key": "NSE_EQ|INE121A01024",
+    "isin": "INE121A01024",
+    "name": "CHOLAMANDALAM IN & FIN CO",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "TIINDIA": {
+    "instrument_key": "NSE_EQ|INE974X01010",
+    "isin": "INE974X01010",
+    "name": "TUBE INVEST OF INDIA LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "UNITDSPR": {
+    "instrument_key": "NSE_EQ|INE854D01024",
+    "isin": "INE854D01024",
+    "name": "UNITED SPIRITS LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "ADANIPORTS": {
+    "instrument_key": "NSE_EQ|INE742F01042",
+    "isin": "INE742F01042",
+    "name": "ADANI PORT & SEZ LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "VOLTAS": {
+    "instrument_key": "NSE_EQ|INE226A01021",
+    "isin": "INE226A01021",
+    "name": "VOLTAS LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "LGEINDIA": {
+    "instrument_key": "NSE_EQ|INE324D01010",
+    "isin": "INE324D01010",
+    "name": "LG ELECTRONICS INDIA LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "GRASIM": {
+    "instrument_key": "NSE_EQ|INE047A01021",
+    "isin": "INE047A01021",
+    "name": "GRASIM INDUSTRIES LTD",
+    "primary_index": "NIFTYMETAL"
+  },
+  "LUPIN": {
+    "instrument_key": "NSE_EQ|INE326A01037",
+    "isin": "INE326A01037",
+    "name": "LUPIN LIMITED",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "NMDC": {
+    "instrument_key": "NSE_EQ|INE584A01023",
+    "isin": "INE584A01023",
+    "name": "NMDC LTD.",
+    "primary_index": "NIFTYMETAL"
+  },
+  "MUTHOOTFIN": {
+    "instrument_key": "NSE_EQ|INE414G01012",
+    "isin": "INE414G01012",
+    "name": "MUTHOOT FINANCE LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "IDEA": {
+    "instrument_key": "NSE_EQ|INE669E01016",
+    "isin": "INE669E01016",
+    "name": "VODAFONE IDEA LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "PHOENIXLTD": {
+    "instrument_key": "NSE_EQ|INE211B01039",
+    "isin": "INE211B01039",
+    "name": "THE PHOENIX MILLS LTD",
+    "primary_index": "NIFTYREALTY"
+  },
+  "TORNTPOWER": {
+    "instrument_key": "NSE_EQ|INE813H01021",
+    "isin": "INE813H01021",
+    "name": "TORRENT POWER LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ONGC": {
+    "instrument_key": "NSE_EQ|INE213A01029",
+    "isin": "INE213A01029",
+    "name": "OIL AND NATURAL GAS CORP.",
+    "primary_index": "NIFTY INFRA"
+  },
+  "IRCTC": {
+    "instrument_key": "NSE_EQ|INE335Y01020",
+    "isin": "INE335Y01020",
+    "name": "INDIAN RAIL TOUR CORP LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ADANIENSOL": {
+    "instrument_key": "NSE_EQ|INE931S01010",
+    "isin": "INE931S01010",
+    "name": "ADANI ENERGY SOLUTION LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "COCHINSHIP": {
+    "instrument_key": "NSE_EQ|INE704P01025",
+    "isin": "INE704P01025",
+    "name": "COCHIN SHIPYARD LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "IRFC": {
+    "instrument_key": "NSE_EQ|INE053F01010",
+    "isin": "INE053F01010",
+    "name": "INDIAN RAILWAY FIN CORP L",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "HDFCAMC": {
+    "instrument_key": "NSE_EQ|INE127D01025",
+    "isin": "INE127D01025",
+    "name": "HDFC AMC LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "ASIANPAINT": {
+    "instrument_key": "NSE_EQ|INE021A01026",
+    "isin": "INE021A01026",
+    "name": "ASIAN PAINTS LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "MPHASIS": {
+    "instrument_key": "NSE_EQ|INE356A01018",
+    "isin": "INE356A01018",
+    "name": "MPHASIS LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "NTPC": {
+    "instrument_key": "NSE_EQ|INE733E01010",
+    "isin": "INE733E01010",
+    "name": "NTPC LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "LICHSGFIN": {
+    "instrument_key": "NSE_EQ|INE115A01026",
+    "isin": "INE115A01026",
+    "name": "LIC HOUSING FINANCE LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "APLAPOLLO": {
+    "instrument_key": "NSE_EQ|INE702C01027",
+    "isin": "INE702C01027",
+    "name": "APL APOLLO TUBES LTD",
+    "primary_index": "NIFTYMETAL"
+  },
+  "NYKAA": {
+    "instrument_key": "NSE_EQ|INE388Y01029",
+    "isin": "INE388Y01029",
+    "name": "FSN E COMMERCE VENTURES",
+    "primary_index": "NIFTYFMCG"
+  },
+  "ABB": {
+    "instrument_key": "NSE_EQ|INE117A01022",
+    "isin": "INE117A01022",
+    "name": "ABB INDIA LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "NESTLEIND": {
+    "instrument_key": "NSE_EQ|INE239A01024",
+    "isin": "INE239A01024",
+    "name": "NESTLE INDIA LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "APOLLOHOSP": {
+    "instrument_key": "NSE_EQ|INE437A01024",
+    "isin": "INE437A01024",
+    "name": "APOLLO HOSPITALS ENTER. L",
+    "primary_index": "NIFTYHEALTHCARE"
+  },
+  "TATAPOWER": {
+    "instrument_key": "NSE_EQ|INE245A01021",
+    "isin": "INE245A01021",
+    "name": "TATA POWER CO LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "INDHOTEL": {
+    "instrument_key": "NSE_EQ|INE053A01029",
+    "isin": "INE053A01029",
+    "name": "THE INDIAN HOTELS CO. LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "MARICO": {
+    "instrument_key": "NSE_EQ|INE196A01026",
+    "isin": "INE196A01026",
+    "name": "MARICO LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "INDUSTOWER": {
+    "instrument_key": "NSE_EQ|INE121J01017",
+    "isin": "INE121J01017",
+    "name": "INDUS TOWERS LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ATGL": {
+    "instrument_key": "NSE_EQ|INE399L01023",
+    "isin": "INE399L01023",
+    "name": "ADANI TOTAL GAS LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "JSWENERGY": {
+    "instrument_key": "NSE_EQ|INE121E01018",
+    "isin": "INE121E01018",
+    "name": "JSW ENERGY LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "JSWSTEEL": {
+    "instrument_key": "NSE_EQ|INE019A01038",
+    "isin": "INE019A01038",
+    "name": "JSW STEEL LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "TATACOMM": {
+    "instrument_key": "NSE_EQ|INE151A01013",
+    "isin": "INE151A01013",
+    "name": "TATA COMMUNICATIONS LTD",
+    "primary_index": "NIFTYIT"
+  },
+  "COALINDIA": {
+    "instrument_key": "NSE_EQ|INE522F01014",
+    "isin": "INE522F01014",
+    "name": "COAL INDIA LTD",
+    "primary_index": "NIFTYMETAL"
+  },
+  "BAJFINANCE": {
+    "instrument_key": "NSE_EQ|INE296A01032",
+    "isin": "INE296A01032",
+    "name": "BAJAJ FINANCE LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "HAL": {
+    "instrument_key": "NSE_EQ|INE066F01020",
+    "isin": "INE066F01020",
+    "name": "HINDUSTAN AERONAUTICS LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "RELIANCE": {
+    "instrument_key": "NSE_EQ|INE002A01018",
+    "isin": "INE002A01018",
+    "name": "RELIANCE INDUSTRIES LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "IGL": {
+    "instrument_key": "NSE_EQ|INE203G01027",
+    "isin": "INE203G01027",
+    "name": "INDRAPRASTHA GAS LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "TCS": {
+    "instrument_key": "NSE_EQ|INE467B01029",
+    "isin": "INE467B01029",
+    "name": "TATA CONSULTANCY SERV LT",
+    "primary_index": "NIFTYIT"
+  },
+  "NTPCGREEN": {
+    "instrument_key": "NSE_EQ|INE0ONG01011",
+    "isin": "INE0ONG01011",
+    "name": "NTPC GREEN ENERGY LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "AMBUJACEM": {
+    "instrument_key": "NSE_EQ|INE079A01024",
+    "isin": "INE079A01024",
+    "name": "AMBUJA CEMENTS LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "LICI": {
+    "instrument_key": "NSE_EQ|INE0J1Y01017",
+    "isin": "INE0J1Y01017",
+    "name": "LIFE INSURA CORP OF INDIA",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "GODFRYPHLP": {
+    "instrument_key": "NSE_EQ|INE260B01028",
+    "isin": "INE260B01028",
+    "name": "GODFREY PHILLIPS INDIA LT",
+    "primary_index": "NIFTYFMCG"
+  },
+  "HDFCBANK": {
+    "instrument_key": "NSE_EQ|INE040A01034",
+    "isin": "INE040A01034",
+    "name": "HDFC BANK LTD",
+    "primary_index": "NIFTYBANK"
+  },
+  "PIIND": {
+    "instrument_key": "NSE_EQ|INE603J01030",
+    "isin": "INE603J01030",
+    "name": "PI INDUSTRIES LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "IREDA": {
+    "instrument_key": "NSE_EQ|INE202E01016",
+    "isin": "INE202E01016",
+    "name": "INDIAN RENEWABLE ENERGY",
+    "primary_index": "NIFTY INFRA"
+  },
+  "NAUKRI": {
+    "instrument_key": "NSE_EQ|INE663F01032",
+    "isin": "INE663F01032",
+    "name": "INFO EDGE (I) LTD",
+    "primary_index": "NIFTYIT"
+  },
+  "EICHERMOT": {
+    "instrument_key": "NSE_EQ|INE066A01021",
+    "isin": "INE066A01021",
+    "name": "EICHER MOTORS LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "POWERGRID": {
+    "instrument_key": "NSE_EQ|INE752E01010",
+    "isin": "INE752E01010",
+    "name": "POWER GRID CORP. LTD.",
+    "primary_index": "NIFTY INFRA"
+  },
+  "DLF": {
+    "instrument_key": "NSE_EQ|INE271C01023",
+    "isin": "INE271C01023",
+    "name": "DLF LIMITED",
+    "primary_index": "NIFTYREALTY"
+  },
+  "PIDILITIND": {
+    "instrument_key": "NSE_EQ|INE318A01026",
+    "isin": "INE318A01026",
+    "name": "PIDILITE INDUSTRIES LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "BAJAJFINSV": {
+    "instrument_key": "NSE_EQ|INE918I01026",
+    "isin": "INE918I01026",
+    "name": "BAJAJ FINSERV LTD.",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "JIOFIN": {
+    "instrument_key": "NSE_EQ|INE758E01017",
+    "isin": "INE758E01017",
+    "name": "JIO FIN SERVICES LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "DRREDDY": {
+    "instrument_key": "NSE_EQ|INE089A01031",
+    "isin": "INE089A01031",
+    "name": "DR. REDDY S LABORATORIES",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "NHPC": {
+    "instrument_key": "NSE_EQ|INE848E01016",
+    "isin": "INE848E01016",
+    "name": "NHPC LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "PAYTM": {
+    "instrument_key": "NSE_EQ|INE982J01020",
+    "isin": "INE982J01020",
+    "name": "ONE 97 COMMUNICATIONS LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "PAGEIND": {
+    "instrument_key": "NSE_EQ|INE761H01022",
+    "isin": "INE761H01022",
+    "name": "PAGE INDUSTRIES LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "TVSMOTOR": {
+    "instrument_key": "NSE_EQ|INE494B01023",
+    "isin": "INE494B01023",
+    "name": "TVS MOTOR COMPANY  LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "INDIGO": {
+    "instrument_key": "NSE_EQ|INE646L01027",
+    "isin": "INE646L01027",
+    "name": "INTERGLOBE AVIATION LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "HYUNDAI": {
+    "instrument_key": "NSE_EQ|INE0V6F01027",
+    "isin": "INE0V6F01027",
+    "name": "HYUNDAI MOTOR INDIA LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "ZYDUSLIFE": {
+    "instrument_key": "NSE_EQ|INE010B01027",
+    "isin": "INE010B01027",
+    "name": "ZYDUS LIFESCIENCES LTD",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "EXIDEIND": {
+    "instrument_key": "NSE_EQ|INE302A01020",
+    "isin": "INE302A01020",
+    "name": "EXIDE INDUSTRIES LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "MANKIND": {
+    "instrument_key": "NSE_EQ|INE634S01028",
+    "isin": "INE634S01028",
+    "name": "MANKIND PHARMA LIMITED",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "BHARTIARTL": {
+    "instrument_key": "NSE_EQ|INE397D01024",
+    "isin": "INE397D01024",
+    "name": "BHARTI AIRTEL LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "DMART": {
+    "instrument_key": "NSE_EQ|INE192R01011",
+    "isin": "INE192R01011",
+    "name": "AVENUE SUPERMARTS LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "CIPLA": {
+    "instrument_key": "NSE_EQ|INE059A01026",
+    "isin": "INE059A01026",
+    "name": "CIPLA LTD",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "BAJAJHFL": {
+    "instrument_key": "NSE_EQ|INE377Y01014",
+    "isin": "INE377Y01014",
+    "name": "BAJAJ HOUSING FINANCE LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "BHARTIHEXA": {
+    "instrument_key": "NSE_EQ|INE343G01021",
+    "isin": "INE343G01021",
+    "name": "BHARTI HEXACOM LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "JUBLFOOD": {
+    "instrument_key": "NSE_EQ|INE797F01020",
+    "isin": "INE797F01020",
+    "name": "JUBILANT FOODWORKS LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "MFSL": {
+    "instrument_key": "NSE_EQ|INE180A01020",
+    "isin": "INE180A01020",
+    "name": "MAX FINANCIAL SERV LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "AUBANK": {
+    "instrument_key": "NSE_EQ|INE949L01017",
+    "isin": "INE949L01017",
+    "name": "AU SMALL FINANCE BANK LTD",
+    "primary_index": "NIFTYBANK"
+  },
+  "HDFCLIFE": {
+    "instrument_key": "NSE_EQ|INE795G01014",
+    "isin": "INE795G01014",
+    "name": "HDFC LIFE INS CO LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "TITAN": {
+    "instrument_key": "NSE_EQ|INE280A01028",
+    "isin": "INE280A01028",
+    "name": "TITAN COMPANY LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "CUMMINSIND": {
+    "instrument_key": "NSE_EQ|INE298A01020",
+    "isin": "INE298A01020",
+    "name": "CUMMINS INDIA LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "TMPV": {
+    "instrument_key": "NSE_EQ|INE155A01022",
+    "isin": "INE155A01022",
+    "name": "TATA MOTORS PASS VEH LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "OIL": {
+    "instrument_key": "NSE_EQ|INE274J01014",
+    "isin": "INE274J01014",
+    "name": "OIL INDIA LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ACC": {
+    "instrument_key": "NSE_EQ|INE012A01025",
+    "isin": "INE012A01025",
+    "name": "ACC LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "INDUSINDBK": {
+    "instrument_key": "NSE_EQ|INE095A01012",
+    "isin": "INE095A01012",
+    "name": "INDUSIND BANK LIMITED",
+    "primary_index": "NIFTYBANK"
+  },
+  "INDIANB": {
+    "instrument_key": "NSE_EQ|INE562A01011",
+    "isin": "INE562A01011",
+    "name": "INDIAN BANK",
+    "primary_index": "NIFTYBANK"
+  },
+  "SUPREMEIND": {
+    "instrument_key": "NSE_EQ|INE195A01028",
+    "isin": "INE195A01028",
+    "name": "SUPREME INDUSTRIES LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "BSE": {
+    "instrument_key": "NSE_EQ|INE118H01025",
+    "isin": "INE118H01025",
+    "name": "BSE LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "ADANIGREEN": {
+    "instrument_key": "NSE_EQ|INE364U01010",
+    "isin": "INE364U01010",
+    "name": "ADANI GREEN ENERGY LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "AXISBANK": {
+    "instrument_key": "NSE_EQ|INE238A01034",
+    "isin": "INE238A01034",
+    "name": "AXIS BANK LIMITED",
+    "primary_index": "NIFTYBANK"
+  },
+  "SUNPHARMA": {
+    "instrument_key": "NSE_EQ|INE044A01036",
+    "isin": "INE044A01036",
+    "name": "SUN PHARMACEUTICAL IND L",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "ITCHOTELS": {
+    "instrument_key": "NSE_EQ|INE379A01028",
+    "isin": "INE379A01028",
+    "name": "ITC HOTELS LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "MOTILALOFS": {
+    "instrument_key": "NSE_EQ|INE338I01027",
+    "isin": "INE338I01027",
+    "name": "MOTILAL OSWAL FIN LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "DIXON": {
+    "instrument_key": "NSE_EQ|INE935N01020",
+    "isin": "INE935N01020",
+    "name": "DIXON TECHNO (INDIA) LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "HINDALCO": {
+    "instrument_key": "NSE_EQ|INE038A01020",
+    "isin": "INE038A01020",
+    "name": "HINDALCO  INDUSTRIES  LTD",
+    "primary_index": "NIFTYMETAL"
+  },
+  "HUDCO": {
+    "instrument_key": "NSE_EQ|INE031A01017",
+    "isin": "INE031A01017",
+    "name": "HSG & URBAN DEV CORPN LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "IOC": {
+    "instrument_key": "NSE_EQ|INE242A01010",
+    "isin": "INE242A01010",
+    "name": "INDIAN OIL CORP LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "UNIONBANK": {
+    "instrument_key": "NSE_EQ|INE692A01016",
+    "isin": "INE692A01016",
+    "name": "UNION BANK OF INDIA",
+    "primary_index": "NIFTYBANK"
+  },
+  "KPITTECH": {
+    "instrument_key": "NSE_EQ|INE04I401011",
+    "isin": "INE04I401011",
+    "name": "KPIT TECHNOLOGIES LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "FORTIS": {
+    "instrument_key": "NSE_EQ|INE061F01013",
+    "isin": "INE061F01013",
+    "name": "FORTIS HEALTHCARE LTD",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "BEL": {
+    "instrument_key": "NSE_EQ|INE263A01024",
+    "isin": "INE263A01024",
+    "name": "BHARAT ELECTRONICS LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "RECLTD": {
+    "instrument_key": "NSE_EQ|INE020B01018",
+    "isin": "INE020B01018",
+    "name": "REC LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "TORNTPHARM": {
+    "instrument_key": "NSE_EQ|INE685A01028",
+    "isin": "INE685A01028",
+    "name": "TORRENT PHARMACEUTICALS L",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "SRF": {
+    "instrument_key": "NSE_EQ|INE647A01010",
+    "isin": "INE647A01010",
+    "name": "SRF LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "HCLTECH": {
+    "instrument_key": "NSE_EQ|INE860A01027",
+    "isin": "INE860A01027",
+    "name": "HCL TECHNOLOGIES LTD",
+    "primary_index": "NIFTYIT"
+  },
+  "PREMIERENE": {
+    "instrument_key": "NSE_EQ|INE0BS701011",
+    "isin": "INE0BS701011",
+    "name": "PREMIER ENERGIES LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "SWIGGY": {
+    "instrument_key": "NSE_EQ|INE00H001014",
+    "isin": "INE00H001014",
+    "name": "SWIGGY LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "FEDERALBNK": {
+    "instrument_key": "NSE_EQ|INE171A01029",
+    "isin": "INE171A01029",
+    "name": "FEDERAL BANK LTD",
+    "primary_index": "NIFTYBANK"
+  },
+  "PERSISTENT": {
+    "instrument_key": "NSE_EQ|INE262H01021",
+    "isin": "INE262H01021",
+    "name": "PERSISTENT SYSTEMS LTD",
+    "primary_index": "NIFTYIT"
+  },
+  "BANKINDIA": {
+    "instrument_key": "NSE_EQ|INE084A01016",
+    "isin": "INE084A01016",
+    "name": "BANK OF INDIA",
+    "primary_index": "NIFTYBANK"
+  },
+  "MOTHERSON": {
+    "instrument_key": "NSE_EQ|INE775A01035",
+    "isin": "INE775A01035",
+    "name": "SAMVRDHNA MTHRSN INTL LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "KEI": {
+    "instrument_key": "NSE_EQ|INE878B01027",
+    "isin": "INE878B01027",
+    "name": "KEI INDUSTRIES LTD.",
+    "primary_index": "NIFTY INFRA"
+  },
+  "SBICARD": {
+    "instrument_key": "NSE_EQ|INE018E01016",
+    "isin": "INE018E01016",
+    "name": "SBI CARDS & PAY SER LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "GMRAIRPORT": {
+    "instrument_key": "NSE_EQ|INE776C01039",
+    "isin": "INE776C01039",
+    "name": "GMR AIRPORTS LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "POLICYBZR": {
+    "instrument_key": "NSE_EQ|INE417T01026",
+    "isin": "INE417T01026",
+    "name": "PB FINTECH LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "RVNL": {
+    "instrument_key": "NSE_EQ|INE415G01027",
+    "isin": "INE415G01027",
+    "name": "RAIL VIKAS NIGAM LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "IRB": {
+    "instrument_key": "NSE_EQ|INE821I01022",
+    "isin": "INE821I01022",
+    "name": "IRB INFRA DEV LTD.",
+    "primary_index": "NIFTY INFRA"
+  },
+  "BOSCHLTD": {
+    "instrument_key": "NSE_EQ|INE323A01026",
+    "isin": "INE323A01026",
+    "name": "BOSCH LIMITED",
+    "primary_index": "NIFTYAUTO"
+  },
+  "LTIM": {
+    "instrument_key": "NSE_EQ|INE214T01019",
+    "isin": "INE214T01019",
+    "name": "LTIMINDTREE LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "HAVELLS": {
+    "instrument_key": "NSE_EQ|INE176B01034",
+    "isin": "INE176B01034",
+    "name": "HAVELLS INDIA LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "MAZDOCK": {
+    "instrument_key": "NSE_EQ|INE249Z01020",
+    "isin": "INE249Z01020",
+    "name": "MAZAGON DOCK SHIPBUIL LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ETERNAL": {
+    "instrument_key": "NSE_EQ|INE758T01015",
+    "isin": "INE758T01015",
+    "name": "ETERNAL LIMITED",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "ITC": {
+    "instrument_key": "NSE_EQ|INE154A01025",
+    "isin": "INE154A01025",
+    "name": "ITC LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "POLYCAB": {
+    "instrument_key": "NSE_EQ|INE455K01017",
+    "isin": "INE455K01017",
+    "name": "POLYCAB INDIA LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "AUROPHARMA": {
+    "instrument_key": "NSE_EQ|INE406A01037",
+    "isin": "INE406A01037",
+    "name": "AUROBINDO PHARMA LTD",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "M&M": {
+    "instrument_key": "NSE_EQ|INE101A01026",
+    "isin": "INE101A01026",
+    "name": "MAHINDRA & MAHINDRA LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "ASHOKLEY": {
+    "instrument_key": "NSE_EQ|INE208A01029",
+    "isin": "INE208A01029",
+    "name": "ASHOK LEYLAND LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "ICICIBANK": {
+    "instrument_key": "NSE_EQ|INE090A01021",
+    "isin": "INE090A01021",
+    "name": "ICICI BANK LTD.",
+    "primary_index": "NIFTYBANK"
+  },
+  "BLUESTARCO": {
+    "instrument_key": "NSE_EQ|INE472A01039",
+    "isin": "INE472A01039",
+    "name": "BLUE STAR LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "UPL": {
+    "instrument_key": "NSE_EQ|INE628A01036",
+    "isin": "INE628A01036",
+    "name": "UPL LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "SUZLON": {
+    "instrument_key": "NSE_EQ|INE040H01021",
+    "isin": "INE040H01021",
+    "name": "SUZLON ENERGY LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "LT": {
+    "instrument_key": "NSE_EQ|INE018A01030",
+    "isin": "INE018A01030",
+    "name": "LARSEN & TOUBRO LTD.",
+    "primary_index": "NIFTY INFRA"
+  },
+  "IDFCFIRSTB": {
+    "instrument_key": "NSE_EQ|INE092T01019",
+    "isin": "INE092T01019",
+    "name": "IDFC FIRST BANK LIMITED",
+    "primary_index": "NIFTYBANK"
+  },
+  "CGPOWER": {
+    "instrument_key": "NSE_EQ|INE067A01029",
+    "isin": "INE067A01029",
+    "name": "CG POWER AND IND SOL LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ADANIENT": {
+    "instrument_key": "NSE_EQ|INE423A01024",
+    "isin": "INE423A01024",
+    "name": "ADANI ENTERPRISES LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "COLPAL": {
+    "instrument_key": "NSE_EQ|INE259A01022",
+    "isin": "INE259A01022",
+    "name": "COLGATE PALMOLIVE LTD.",
+    "primary_index": "NIFTYFMCG"
+  },
+  "POWERINDIA": {
+    "instrument_key": "NSE_EQ|INE07Y701011",
+    "isin": "INE07Y701011",
+    "name": "HITACHI ENERGY INDIA LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ICICIGI": {
+    "instrument_key": "NSE_EQ|INE765G01017",
+    "isin": "INE765G01017",
+    "name": "ICICI LOMBARD GIC LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "BHEL": {
+    "instrument_key": "NSE_EQ|INE257A01026",
+    "isin": "INE257A01026",
+    "name": "BHEL",
+    "primary_index": "NIFTY INFRA"
+  },
+  "M&MFIN": {
+    "instrument_key": "NSE_EQ|INE774D01024",
+    "isin": "INE774D01024",
+    "name": "M&M FIN. SERVICES LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "GAIL": {
+    "instrument_key": "NSE_EQ|INE129A01019",
+    "isin": "INE129A01019",
+    "name": "GAIL (INDIA) LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ULTRACEMCO": {
+    "instrument_key": "NSE_EQ|INE481G01011",
+    "isin": "INE481G01011",
+    "name": "ULTRATECH CEMENT LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "SAIL": {
+    "instrument_key": "NSE_EQ|INE114A01011",
+    "isin": "INE114A01011",
+    "name": "STEEL AUTHORITY OF INDIA",
+    "primary_index": "NIFTYMETAL"
+  },
+  "GLENMARK": {
+    "instrument_key": "NSE_EQ|INE935A01035",
+    "isin": "INE935A01035",
+    "name": "GLENMARK PHARMACEUTICALS",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "SIEMENS": {
+    "instrument_key": "NSE_EQ|INE003A01024",
+    "isin": "INE003A01024",
+    "name": "SIEMENS LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ZENSARTECH": {
+    "instrument_key": "NSE_EQ|INE520A01027",
+    "isin": "INE520A01027",
+    "name": "ZENSAR TECHNOLOGIES LTD",
+    "primary_index": "NIFTYIT"
+  },
+  "CHAMBLFERT": {
+    "instrument_key": "NSE_EQ|INE085A01013",
+    "isin": "INE085A01013",
+    "name": "CHAMBAL FERTILISERS & CHEMICALS LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "GROWW": {
+    "instrument_key": "NSE_EQ|INE0HOQ01053",
+    "isin": "INE0HOQ01053",
+    "name": "BILLIONBRAINS GARAGE VENTURES LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "HONASA": {
+    "instrument_key": "NSE_EQ|INE0J5401028",
+    "isin": "INE0J5401028",
+    "name": "HONASA CONSUMER LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "HCC": {
+    "instrument_key": "NSE_EQ|INE549A01026",
+    "isin": "INE549A01026",
+    "name": "HINDUSTAN CONSTRUCTION CO LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "RAJRATAN": {
+    "instrument_key": "NSE_EQ|INE451D01029",
+    "isin": "INE451D01029",
+    "name": "RAJRATAN GLOBAL WIRE LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "WESTLIFE": {
+    "instrument_key": "NSE_EQ|INE274F01020",
+    "isin": "INE274F01020",
+    "name": "WESTLIFE FOODWORLD LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "DEVYANI": {
+    "instrument_key": "NSE_EQ|INE872J01023",
+    "isin": "INE872J01023",
+    "name": "DEVYANI INTERNATIONAL LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "CDSL": {
+    "instrument_key": "NSE_EQ|INE736A01011",
+    "isin": "INE736A01011",
+    "name": "CENTRAL DEPO SER (I) LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "RELAXO": {
+    "instrument_key": "NSE_EQ|INE131B01039",
+    "isin": "INE131B01039",
+    "name": "RELAXO FOOT LTD.",
+    "primary_index": "NIFTYFMCG"
+  },
+  "GMMPFAUDLR": {
+    "instrument_key": "NSE_EQ|INE541A01023",
+    "isin": "INE541A01023",
+    "name": "GMM PFAUDLR LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "BASF": {
+    "instrument_key": "NSE_EQ|INE373A01013",
+    "isin": "INE373A01013",
+    "name": "BASF INDIA LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "CAPLIPOINT": {
+    "instrument_key": "NSE_EQ|INE475E01026",
+    "isin": "INE475E01026",
+    "name": "CAPLIN POINT LAB LTD.",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "BPCL": {
+    "instrument_key": "NSE_EQ|INE029A01011",
+    "isin": "INE029A01011",
+    "name": "BHARAT PETROLEUM CORP  LT",
+    "primary_index": "NIFTY INFRA"
+  },
+  "TATAELXSI": {
+    "instrument_key": "NSE_EQ|INE670A01012",
+    "isin": "INE670A01012",
+    "name": "TATA ELXSI LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "VBL": {
+    "instrument_key": "NSE_EQ|INE200M01039",
+    "isin": "INE200M01039",
+    "name": "VARUN BEVERAGES LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "DABUR": {
+    "instrument_key": "NSE_EQ|INE016A01026",
+    "isin": "INE016A01026",
+    "name": "DABUR INDIA LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "NIFTY50": {
+    "instrument_key": "NSE_INDEX|Nifty 50",
+    "isin": "NIFTY50XXXXXX",
+    "name": "NIFTY 50 INDEX",
+    "primary_index": "SENSEX"
+  },
+  "NIFTYBANK": {
+    "instrument_key": "NSE_INDEX|Nifty Bank",
+    "isin": "NIFTYBANKXXXX",
+    "name": "NIFTY BANK INDEX",
+    "primary_index": null
+  },
+  "NIFTYNXT50": {
+    "instrument_key": "NSE_INDEX|Nifty Next 50",
+    "isin": "NIFTYNXT50X",
+    "name": "NIFTY NEXT 50 INDEX",
+    "primary_index": "NIFTY50"
+  },
+  "NIFTY MIDCAP 150": {
+    "instrument_key": "NSE_INDEX|NIFTY MIDCAP 150",
+    "isin": "NIFTYMID150X",
+    "name": "NIFTY MIDCAP 150 INDEX",
+    "primary_index": "NIFTY50"
+  },
+  "NIFTY200": {
+    "instrument_key": "NSE_INDEX|Nifty 200",
+    "isin": "NIFTY200XXX",
+    "name": "NIFTY 200 INDEX",
+    "primary_index": "NIFTY50"
+  },
+  "NIFTY500": {
+    "instrument_key": "NSE_INDEX|Nifty 500",
+    "isin": "NIFTY500XXX",
+    "name": "NIFTY 500 INDEX",
+    "primary_index": "NIFTY50"
+  },
+  "NIFTYIT": {
+    "instrument_key": "NSE_INDEX|Nifty IT",
+    "isin": "NIFTYITXXXX",
+    "name": "NIFTY IT INDEX",
+    "primary_index": null
+  },
+  "NIFTYFMCG": {
+    "instrument_key": "NSE_INDEX|Nifty FMCG",
+    "isin": "NIFTYFMCGXX",
+    "name": "NIFTY FMCG INDEX",
+    "primary_index": null
+  },
+  "NIFTYPHARMA": {
+    "instrument_key": "NSE_INDEX|Nifty Pharma",
+    "isin": "NIFTYPHARMAX",
+    "name": "NIFTY PHARMA INDEX",
+    "primary_index": null
+  },
+  "NIFTYMETAL": {
+    "instrument_key": "NSE_INDEX|Nifty Metal",
+    "isin": "NIFTYMETALX",
+    "name": "NIFTY METAL INDEX",
+    "primary_index": null
+  },
+  "NIFTYAUTO": {
+    "instrument_key": "NSE_INDEX|Nifty Auto",
+    "isin": "NIFTYAUTOXX",
+    "name": "NIFTY AUTO INDEX",
+    "primary_index": null
+  },
+  "NIFTYFINSERVICE": {
+    "instrument_key": "NSE_INDEX|Nifty Fin Service",
+    "isin": "NIFTYFINSRV",
+    "name": "NIFTY FINANCIAL SERVICES INDEX",
+    "primary_index": null
+  },
+  "NIFTY INFRA": {
+    "instrument_key": "NSE_INDEX|Nifty Infra",
+    "isin": "NIFTYINFRAXX",
+    "name": "NIFTY INFRA INDEX",
+    "primary_index": null
+  },
+  "INDIA VIX": {
+    "instrument_key": "NSE_INDEX|India VIX",
+    "isin": "INDIAVIXXXX",
+    "name": "INDIA VIX INDEX",
+    "primary_index": "NIFTY50"
+  },
+  "SENSEX": {
+    "instrument_key": "BSE_INDEX|SENSEX",
+    "isin": "SENSEXXXXX",
+    "name": "SENSEX",
+    "primary_index": "NIFTY50"
+  },
+  "BANKEX": {
+    "instrument_key": "BSE_INDEX|BANKEX",
+    "isin": "BANKEXXXXX",
+    "name": "BANKEX",
+    "primary_index": "NIFTYBANK"
+  },
+  "SILVERBEES": {
+    "instrument_key": "NSE_EQ|INF204KC1402",
+    "isin": "INF204KC1402",
+    "name": "NIPPON INDIA ETF SILVER BEES",
+    "primary_index": null
+  },
+  "GOLDBEES": {
+    "instrument_key": "NSE_EQ|INF204KB17I5",
+    "isin": "INF204KB17I5",
+    "name": "NIPPON INDIA ETF GOLD BEES",
+    "primary_index": null
+  },
+  "ITBEES": {
+    "instrument_key": "NSE_EQ|INF204KB15V2",
+    "isin": "INF204KB15V2",
+    "name": "NIPPON INDIA ETF NIFTY IT",
+    "primary_index": "NIFTYIT"
+  },
+  "SETFGOLD": {
+    "instrument_key": "NSE_EQ|SETFGOLD",
+    "isin": "INF740K014N5",
+    "name": "SBI ETF GOLD",
+    "primary_index": null
+  },
+  "NIFTYBEES": {
+    "instrument_key": "NSE_EQ|INF204KB14I2",
+    "isin": "INF204KB14I2",
+    "name": "NIPPON INDIA ETF NIFTY 50 BEES",
+    "primary_index": "NIFTY50"
+  },
+  "HDFCSILVER": {
+    "instrument_key": "NSE_EQ|HDFCSILVER",
+    "isin": "INF179KC1EQ7",
+    "name": "HDFC SILVER ETF",
+    "primary_index": null
+  },
+  "METALIETF": {
+    "instrument_key": "NSE_EQ|INF109KC19W1",
+    "isin": "INF109KC19W1",
+    "name": "ICICI PRU NIFTY METAL ETF",
+    "primary_index": "NIFTYMETAL"
+  },
+  "PHARMABEES": {
+    "instrument_key": "NSE_EQ|INF204KC1089",
+    "isin": "INF204KC1089",
+    "name": "NIPPON INDIA NIFTY PHARMA ETF",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "FMCGIETF": {
+    "instrument_key": "NSE_EQ|INF109KC19V3",
+    "isin": "INF109KC19V3",
+    "name": "HDFC NIFTY FMCG ETF",
+    "primary_index": "NIFTYFMCG"
+  },
+  "MAHKTECH": {
+    "instrument_key": "NSE_EQ|INF769K01HS7",
+    "isin": "INF769K01HS7",
+    "name": "Mirae Asset Hang Seng TECH ETF",
+    "primary_index": "NIFTYIT"
+  },
+  "PSUBNKBEES": {
+    "instrument_key": "NSE_EQ|INF204KB16I7",
+    "isin": "INF204KB16I7",
+    "name": "NIPPON INDIA ETF PSU BANK BEES",
+    "primary_index": "NIFTYBANK"
+  },
+  "HDFCSML250": {
+    "instrument_key": "NSE_EQ|INF179KC1FB2",
+    "isin": "INF179KC1FB2",
+    "name": "HDFC NIFTY SMALLCAP 250 ETF",
+    "primary_index": "NIFTY SMLCAP 250"
+  },
+  "NIFTY SMLCAP 250": {
+    "instrument_key": "NSE_INDEX|NIFTY SMLCAP 250",
+    "isin": "NIFTYSML250XXX",
+    "name": "NIFTY SMALLCAP 250 INDEX",
+    "primary_index": null
+  },
+  "SETFNIF50": {
+    "instrument_key": "NSE_EQ|INF200KA1FS1",
+    "isin": "INF200KA1FS1",
+    "name": "SBI ETF NIFTY 50",
+    "primary_index": "NIFTY50"
+  },
+  "NV20IETF": {
+    "instrument_key": "NSE_EQ|INF109KC11V0",                                                                                                                                                                                                                                                                                                           
+    "isin": "INF109KC11V0",
+    "name": "ICICI PRUDENTIAL NV20 ETF",
+    "primary_index": "NIFTY50"
+  },
+  "LOWVOLIETF": {
+    "instrument_key": "NSE_EQ|LOWVOLIETF",
+    "isin": "INF109KC1HO1",
+    "name": "HDFC NIFTY LOW VOLATILITY 30 ETF",
+    "primary_index": null
+  },
+  "MON100": {
+    "instrument_key": "NSE_EQ|INF247L01AP3",
+    "isin": "INF247L01AP3",
+    "name": "MOTILAL OS NASDAQ100 ETF",
+    "primary_index": null
+  },
+  "OILIETF": {
+    "instrument_key": "NSE_EQ|INF109KC18W3",
+    "isin": "INF109KC18W3",
+    "name": "MOTILAL OSWAL NIFTY OIL & GAS ETF",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ALPHA": {
+    "instrument_key": "NSE_EQ|INF174KA1IA5",
+    "isin": "INF174KA1IA5",
+    "name": "Kotak Mahindra AMC - Kotak Alpha",
+    "primary_index": "NIFTY ALPHA 50"
+  },
+  "NIFTY ALPHA 50": {
+    "instrument_key": "NSE_INDEX|NIFTY Alpha 50",
+    "isin": "NIFTYALPHA50",
+    "name": "NIFTY Alpha 50",
+    "primary_index": "NIFTY50"
+  },
+  "CPSEETF": {
+    "instrument_key": "NSE_EQ|INF457M01133",
+    "isin": "INF457M01133",
+    "name": "CPSE ETF",
+    "primary_index": null
+  },
+  "BANKBEES": {
+    "instrument_key": "NSE_EQ|INF204KB15I9",
+    "isin": "INF204KB15I9",
+    "name": "NIPPON INDIA ETF NIFTY BANK BEES",
+    "primary_index": "NIFTYBANK"
+  },
+  "AUTOIETF": {
+    "instrument_key": "NSE_EQ|AUTOIETF",
+    "isin": "INF109KC1F85",
+    "name": "HDFC NIFTY AUTO ETF",
+    "primary_index": "NIFTYAUTO"
+  },
+  "AUTOBEES": {
+    "instrument_key": "NSE_EQ|AUTOBEES",
+    "isin": "INF204KB13I4",
+    "name": "NIPPON INDIA ETF NIFTY AUTO",
+    "primary_index": "NIFTYAUTO"
+  },
+  "PVTBANIETF": {
+    "instrument_key": "NSE_EQ|PVTBANIETF",
+    "isin": "INF209KB13V5",
+    "name": "ICICI PRU NIFTY PVT BANK ETF",
+    "primary_index": "NIFTYBANK"
+  },
+  "MIDCAPETF": {
+    "instrument_key": "NSE_EQ|MIDCAPETF",
+    "isin": "INF204KB19I3",
+    "name": "NIPPON INDIA ETF NIFTY MIDCAP 150",
+    "primary_index": "NIFTY MIDCAP 150"
+  },
+  "ITIETF": {
+    "instrument_key": "NSE_EQ|ITIETF",
+    "isin": "INF204KB16E9",
+    "name": "NIPPON INDIA ETF INFRA BEES",
+    "primary_index": "NIFTY INFRA"
+  },
+  "MID150BEES": {
+    "instrument_key": "NSE_EQ|MID150BEES",
+    "isin": "INF204KB19H5",
+    "name": "NIPPON INDIA ETF NIFTY MIDCAP 150 BEES",
+    "primary_index": null
+  },
+  "HDFCMID150": {
+    "instrument_key": "NSE_EQ|HDFCMID150",
+    "isin": "INF179KB1DT6",
+    "name": "HDFC NIFTY MIDCAP 150 ETF",
+    "primary_index": null
+  },
+  "ALPHAETF": {
+    "instrument_key": "NSE_EQ|ALPHAETF",
+    "isin": "INF204KB1BR5",
+    "name": "NIPPON INDIA ETF NIFTY ALPHA LOW VOLATILITY 30",
+    "primary_index": null
+  },
+  "BANKIETF": {
+    "instrument_key": "NSE_EQ|BANKIETF",
+    "isin": "INF209KB13U7",
+    "name": "ICICI PRU NIFTY BANK ETF",
+    "primary_index": "NIFTYBANK"
+  },
+  "ICICIB22": {
+    "instrument_key": "NSE_EQ|ICICIB22",
+    "isin": "INF109KB16D0",
+    "name": "ICICI PRUDENTIAL BHARAT 22 ETF",
+    "primary_index": null
+  },
+  "MOM100": {
+    "instrument_key": "NSE_EQ|INF247L01023",
+    "isin": "INF247L01023",
+    "name": "MOTILAL OS MIDCAP100 ETF",
+    "primary_index": null
+  },
+  "QGOLDHALF": {
+    "instrument_key": "NSE_EQ|QGOLDHALF",
+    "isin": "INF082J01178",
+    "name": "QUANTUM GOLD FUND ETF",
+    "primary_index": null
+  },
+  "BFSI": {
+    "instrument_key": "NSE_EQ|BFSI",
+    "isin": "INF204KB1DQ3",
+    "name": "NIPPON INDIA ETF NIFTY FINANCIAL SERVICES",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "CONSUMBEES": {
+    "instrument_key": "NSE_EQ|CONSUMBEES",
+    "isin": "INF204KB13J2",
+    "name": "NIPPON INDIA ETF NIFTY CONSUMPTION",
+    "primary_index": "NIFTYFMCG"
+  },
+  "JUNIORBEES": {
+    "instrument_key": "NSE_EQ|INF204KB19I1",
+    "isin": "INF204KB19I1",
+    "name": "NIPPON INDIA ETF NIFTY NEXT 50 (JUNIOR BEES)",
+    "primary_index": "NIFTYNEXT50"
+  },
+  "MOMENTUM50": {
+    "instrument_key": "NSE_EQ|MOMENTUM50",
+    "isin": "INF247L01CJ9",
+    "name": "MOTILAL OSWAL NIFTY 200 MOMENTUM 30 ETF",
+    "primary_index": null
+  },
+  "BSLNIFTY": {
+    "instrument_key": "NSE_EQ|BSLNIFTY",
+    "isin": "INF209KB14H4",
+    "name": "ADITYA BIRLA SUN LIFE NIFTY 50 ETF",
+    "primary_index": "NIFTY50"
+  },
+  "MONIFTY500": {
+    "instrument_key": "NSE_EQ|MONIFTY500",
+    "isin": "INF247L01FH0",
+    "name": "MOTILAL OSWAL NIFTY 500 ETF",
+    "primary_index": "NIFTY500"
+  },
+  "FINIETF": {
+    "instrument_key": "NSE_EQ|FINIETF",
+    "isin": "INF209KB17H3",
+    "name": "ICICI PRU NIFTY FINANCIAL SERVICES ETF",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "HNGSNGBEES": {
+    "instrument_key": "NSE_EQ|HNGSNGBEES",
+    "isin": "INF204KB19E9",
+    "name": "NIPPON INDIA HANG SENG BEES",
+    "primary_index": null
+  },
+  "ITETF": {
+    "instrument_key": "NSE_EQ|ITETF",
+    "isin": "INF109KB11X0",
+    "name": "ICICI PRU NIFTY IT ETF",
+    "primary_index": "NIFTYIT"
+  },
+  "SETFNIFBK": {
+    "instrument_key": "NSE_EQ|SETFNIFBK",
+    "isin": "INF740K014D3",
+    "name": "SBI ETF NIFTY BANK",
+    "primary_index": "NIFTYBANK"
+  },
+  "HDFCMOMENT": {
+    "instrument_key": "NSE_EQ|HDFCMOMENT",
+    "isin": "INF179KC1FF0",
+    "name": "HDFC NIFTY 200 MOMENTUM 30 ETF",
+    "primary_index": null
+  },
+  "MAFANG": {
+    "instrument_key": "NSE_EQ|MAFANG",
+    "isin": "INF247L01KI3",
+    "name": "MOTILAL OSWAL NASDAQ Q50 ETF",
+    "primary_index": null
+  },
+  "HEALTHY": {
+    "instrument_key": "NSE_EQ|HEALTHY",
+    "isin": "INF247L01GL9",
+    "name": "MOTILAL OSWAL NASDAQ Q50 HEALTHCARE ETF",
+    "primary_index": null
+  },
+  "MIDSELIETF": {
+    "instrument_key": "NSE_EQ|MIDSELIETF",
+    "isin": "INF109KC1G91",
+    "name": "HDFC NIFTY MIDCAP SELECT ETF",
+    "primary_index": null
+  },
+  "NIFTYQLITY": {
+    "instrument_key": "NSE_EQ|NIFTYQLITY",
+    "isin": "INF204KB1BM4",
+    "name": "NIPPON INDIA ETF NIFTY QUALITY 30",
+    "primary_index": null
+  },
+  "MOMOMENTUM": {
+    "instrument_key": "NSE_EQ|MOMOMENTUM",
+    "isin": "INF247L01CK7",
+    "name": "MOTILAL OSWAL NIFTY 200 MOMENTUM 30 ETF",
+    "primary_index": null
+  },
+  "COMMOIETF": {
+    "instrument_key": "NSE_EQ|COMMOIETF",
+    "isin": "INF109KC1H25",
+    "name": "HDFC COMMODITY ETF",
+    "primary_index": null
+  },
+  "ESG": {
+    "instrument_key": "NSE_EQ|ESG",
+    "isin": "INF247L01FK4",
+    "name": "MOTILAL OS S&P 500 ESG ETF",
+    "primary_index": null
+  },
+  "MOVALUE": {
+    "instrument_key": "NSE_EQ|MOVALUE",
+    "isin": "INF247L01CJ7",
+    "name": "MOTILAL OSWAL NIFTY 50 VALUE 20 ETF",
+    "primary_index": "NIFTY50"
+  },
+  "DIVOPPBEES": {
+    "instrument_key": "NSE_EQ|DIVOPPBEES",
+    "isin": "INF204KB13L8",
+    "name": "NIPPON INDIA ETF DIVIDEND OPPORTUNITIES",
+    "primary_index": null
+  },
+  "TNIDETF": {
+    "instrument_key": "NSE_EQ|TNIDETF",
+    "isin": "INF209KB16V4",
+    "name": "ICICI PRU NIFTY INDIA DEFENCE ETF",
+    "primary_index": "NIFTY INFRA"
+  },
+  "LOWVOL1": {
+    "instrument_key": "NSE_EQ|LOWVOL1",
+    "isin": "INF247L01CN1",
+    "name": "MOTILAL OSWAL NIFTY 100 LOW VOLATILITY 30 ETF",
+    "primary_index": null
+  },
+  "MOM30IETF": {
+    "instrument_key": "NSE_EQ|MOM30IETF",
+    "isin": "INF109KC1GD9",
+    "name": "HDFC NIFTY 200 MOMENTUM 30 ETF",
+    "primary_index": null
+  },
+  "VAL30IETF": {
+    "instrument_key": "NSE_EQ|VAL30IETF",
+    "isin": "INF109KC1GE7",
+    "name": "HDFC NIFTY 50 VALUE 20 ETF",
+    "primary_index": "NIFTY50"
+  },
+  "ABSLPSE": {
+    "instrument_key": "NSE_EQ|ABSLPSE",
+    "isin": "INF209KB19J8",
+    "name": "ABSL PSU EQUITY ETF",
+    "primary_index": null
+  },
+  "UTISXN50": {
+    "instrument_key": "NSE_EQ|UTISXN50",
+    "isin": "INF789FB1XH9",
+    "name": "UTI S&P BSE SENSEX NEXT 50 ETF",
+    "primary_index": "NIFTYNEXT50"
+  },
+  "HDFCGROWTH": {
+    "instrument_key": "NSE_EQ|HDFCGROWTH",
+    "isin": "INF179KC1FD5",
+    "name": "HDFC NIFTY GROWTH SECTORS 15 ETF",
+    "primary_index": null
+  },
+  "HDFCQUAL": {
+    "instrument_key": "NSE_EQ|HDFCQUAL",
+    "isin": "INF179KC1FC7",
+    "name": "HDFC NIFTY QUALITY 30 ETF",
+    "primary_index": null
+  },
+  "BSE500IETF": {
+    "instrument_key": "NSE_EQ|BSE500IETF",
+    "isin": "INF209KB19I0",
+    "name": "ICICI PRU S&P BSE 500 ETF",
+    "primary_index": null
+  },
+  "INFRAIETF": {
+    "instrument_key": "NSE_EQ|INFRAIETF",
+    "isin": "INF109KC1H09",
+    "name": "HDFC NIFTY INFRASTRUCTURE ETF",
+    "primary_index": "NIFTY INFRA"
+  },
+  "MNC": {
+    "instrument_key": "NSE_EQ|MNC",
+    "isin": "INF247L01CF6",
+    "name": "MOTILAL OS MSCI EAFE TOP 100 SELECT ETF",
+    "primary_index": null
+  },
+  "MIDSMALL": {
+    "instrument_key": "NSE_EQ|MIDSMALL",
+    "isin": "INF247L01FJ6",
+    "name": "MOTILAL OSWAL NIFTY MIDSMALLCAP 400 ETF",
+    "primary_index": null
+  },
+  "SMALLCAP": {
+    "instrument_key": "NSE_EQ|SMALLCAP",
+    "isin": "INF204KB19C5",
+    "name": "NIPPON INDIA ETF NIFTY SMALLCAP 250",
+    "primary_index": null
+  },
+  "MOREALTY": {
+    "instrument_key": "NSE_EQ|MOREALTY",
+    "isin": "INF247L01FG2",
+    "name": "MOTILAL OSWAL NIFTY REALTY ETF",
+    "primary_index": "NIFTYREALTY"
+  },
+  "MOSMALL250": {
+    "instrument_key": "NSE_EQ|MOSMALL250",
+    "isin": "INF247L01FA5",
+    "name": "MOTILAL OSWAL NIFTY SMALLCAP 250 ETF",
+    "primary_index": null
+  },
+  "MONIFTY50": {
+    "instrument_key": "NSE_EQ|MONIFTY50",
+    "isin": "INF247L01FH8",
+    "name": "MOTILAL OSWAL NIFTY 50 ETF",
+    "primary_index": "NIFTY50"
+  },
+  "TOP100CASE": {
+    "instrument_key": "NSE_EQ|TOP100CASE",
+    "isin": "INF740K015P5",
+    "name": "SBI ETF TOP 100",
+    "primary_index": "NIFTY50"
+  },
+  "EVINDIA": {
+    "instrument_key": "NSE_EQ|EVINDIA",
+    "isin": "INF247L01FP4",
+    "name": "MOTILAL OSWAL EV & NEW AGE TECH ETF",
+    "primary_index": "NIFTYAUTO"
+  },
+  "MOHEALTH": {
+    "instrument_key": "NSE_EQ|MOHEALTH",
+    "isin": "INF247L01FG0",
+    "name": "MOTILAL OSWAL NIFTY HEALTHCARE ETF",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "MOCAPITAL": {
+    "instrument_key": "NSE_EQ|INF247L01EV3",
+    "isin": "INF247L01EV3",
+    "name": "MOTILAL OSWAL NIFTY CAPITAL MARKET ETF",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "MODEFENCE": {
+    "instrument_key": "NSE_EQ|INF247L01DJ0",
+    "isin": "INF247L01DJ0",
+    "name": "MOTILAL OSWAL NIFTY INDIA DEFENCE ETF",
+    "primary_index": "NIFTY INFRA"
+  },
+  "MAKEINDIA": {
+    "instrument_key": "NSE_EQ|MAKEINDIA",
+    "isin": "INF247L01FM1",
+    "name": "MOTILAL OSWAL MAKE IN INDIA ETF",
+    "primary_index": "NIFTY INFRA"
+  },
+  "MIDQ50ADD": {
+    "instrument_key": "NSE_EQ|MIDQ50ADD",
+    "isin": "INF247L01FL3",
+    "name": "MOTILAL OSWAL NIFTY MIDCAP 150 QUALITY 50 ETF",
+    "primary_index": null
+  },
+  "NEXT50IETF": {
+    "instrument_key": "NSE_EQ|NEXT50IETF",
+    "isin": "INF109KC1H33",
+    "name": "HDFC NIFTY NEXT 50 ETF",
+    "primary_index": "NIFTYNEXT50"
+  },
+  "TOP10ADD": {
+    "instrument_key": "NSE_EQ|TOP10ADD",
+    "isin": "INF740K01UT8",
+    "name": "SBI ETF TOP 10",
+    "primary_index": "NIFTY50"
+  },
+  "MULTICAP": {
+    "instrument_key": "NSE_EQ|MULTICAP",
+    "isin": "INF247L01FK2",
+    "name": "MOTILAL OSWAL MULTICAP ETF",
+    "primary_index": null
+  },
+  "EMULTIMQ": {
+    "instrument_key": "NSE_EQ|EMULTIMQ",
+    "isin": "INF247L01FN9",
+    "name": "MOTILAL OSWAL EMERGING MARKETS MULTI-FACTOR ETF",
+    "primary_index": null
+  },
+  "MASPTOP50": {
+    "instrument_key": "NSE_EQ|MASPTOP50",
+    "isin": "INF769K01JM0",
+    "name": "MIRA E ASSET NIFTY 50 ETF",
+    "primary_index": "NIFTY50"
+  },
+  "SENSEXIETF": {
+    "instrument_key": "NSE_EQ|SENSEXIETF",
+    "isin": "INF109KC1GC1",
+    "name": "HDFC SENSEX ETF",
+    "primary_index": "SENSEX"
+  },
+  "SHARIABEES": {
+    "instrument_key": "NSE_EQ|SHARIABEES",
+    "isin": "INF204KB13K0",
+    "name": "NIPPON INDIA ETF SHARIAH BEES",
+    "primary_index": null
+  },
+  "EMBASSY": {
+    "instrument_key": "NSE_EQ|INE041025011",
+    "isin": "INE041025011",
+    "name": "EMBASSY OFFICE PARKS REIT",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "MINDSPACE": {
+    "instrument_key": "NSE_EQ|INE0CCU25019",
+    "isin": "INE0CCU25019",
+    "name": "MINDSPACE BUSINESS PARKS REIT",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "BIRET": {
+    "instrument_key": "NSE_EQ|INE0FDU25010",
+    "isin": "INE0FDU25010",
+    "name": "BROOKFIELD INDIA REAL ESTATE TRUST REIT",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "PGINVIT": {
+    "instrument_key": "NSE_EQ|INE0GGX23010",
+    "isin": "INE0GGX23010",
+    "name": "POWERGRID INFRASTRUCTURE INVESTMENT TRUST",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "INDIGRID": {
+    "instrument_key": "NSE_EQ|INE219X23014",
+    "isin": "INE219X23014",
+    "name": "INDIA GRID TRUST (INDIGRID)",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "IRBINVIT": {
+    "instrument_key": "NSE_EQ|INE183W23014",
+    "isin": "INE183W23014",
+    "name": "IRB INVIT FUND",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "IOB": {
+    "instrument_key": "NSE_EQ|INE565A01014",
+    "isin": "INE565A01014",
+    "name": "INDIAN OVERSEAS BANK",
+    "primary_index": "NIFTYBANK"
+  },
+  "IDBI": {
+    "instrument_key": "NSE_EQ|INE008A01015",
+    "isin": "INE008A01015",
+    "name": "IDBI BANK LIMITED",
+    "primary_index": "NIFTYBANK"
+  },
+  "SOLARINDS": {
+    "instrument_key": "NSE_EQ|INE343H01029",
+    "isin": "INE343H01029",
+    "name": "SOLAR INDUSTRIES INDIA LTD",
+    "primary_index": "NIFTY INFRA"
+  },
+  "GICRE": {
+    "instrument_key": "NSE_EQ|INE481Y01014",
+    "isin": "INE481Y01014",
+    "name": "GENERAL INSURANCE CORPORATION OF INDIA",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "SCHAEFFLER": {
+    "instrument_key": "NSE_EQ|INE513A01014",
+    "isin": "INE513A01014",
+    "name": "SCHAEFFLER INDIA LIMITED",
+    "primary_index": "NIFTYAUTO"
+  },
+  "LINDEINDIA": {
+    "instrument_key": "NSE_EQ|INE473A01011",
+    "isin": "INE473A01011",
+    "name": "LINDE INDIA LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "ABBOTINDIA": {
+    "instrument_key": "NSE_EQ|INE358A01014",
+    "isin": "INE358A01014",
+    "name": "ABBOTT INDIA LIMITED",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "UCOBANK": {
+    "instrument_key": "NSE_EQ|INE691A01018",
+    "isin": "INE691A01018",
+    "name": "UCO BANK",
+    "primary_index": "NIFTYBANK"
+  },
+  "JSL": {
+    "instrument_key": "NSE_EQ|INE220G01021",
+    "isin": "INE220G01021",
+    "name": "JINDAL STAINLESS LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "CENTRALBK": {
+    "instrument_key": "NSE_EQ|INE483A01010",
+    "isin": "INE483A01010",
+    "name": "CENTRAL BANK OF INDIA",
+    "primary_index": "NIFTYBANK"
+  },
+  "3MINDIA": {
+    "instrument_key": "NSE_EQ|INE470A01017",
+    "isin": "INE470A01017",
+    "name": "3M INDIA LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "SUNDARMFIN": {
+    "instrument_key": "NSE_EQ|INE660A01013",
+    "isin": "INE660A01013",
+    "name": "SUNDARAM FINANCE LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "UNOMINDA": {
+    "instrument_key": "NSE_EQ|INE405E01023",
+    "isin": "INE405E01023",
+    "name": "Uno Minda Limited",
+    "primary_index": "NIFTYAUTO"
+  },
+  "SJVN": {
+    "instrument_key": "NSE_EQ|INE002L01015",
+    "isin": "INE002L01015",
+    "name": "SJVN LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "NIACL": {
+    "instrument_key": "NSE_EQ|INE470Y01017",
+    "isin": "INE470Y01017",
+    "name": "THE NEW INDIA ASSURANCE CO LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "NLCINDIA": {
+    "instrument_key": "NSE_EQ|INE589A01014",
+    "isin": "INE589A01014",
+    "name": "NLC INDIA LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "THERMAX": {
+    "instrument_key": "NSE_EQ|INE152A01029",
+    "isin": "INE152A01029",
+    "name": "THERMAX LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "AIAENG": {
+    "instrument_key": "NSE_EQ|INE212H01026",
+    "isin": "INE212H01026",
+    "name": "AIA ENGINEERING LIMITED",
+    "primary_index": "NIFTYMETAL"
+  },
+  "METROBRAND": {
+    "instrument_key": "NSE_EQ|INE317I01021",
+    "isin": "INE317I01021",
+    "name": "METRO BRANDS LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "HONAUT": {
+    "instrument_key": "NSE_EQ|INE671A01010",
+    "isin": "INE671A01010",
+    "name": "HONEYWELL AUTOMATION INDIA LTD",
+    "primary_index": "NIFTYIT"
+  },
+  "MAHABANK": {
+    "instrument_key": "NSE_EQ|INE457A01014",
+    "isin": "INE457A01014",
+    "name": "BANK OF MAHARASHTRA",
+    "primary_index": "NIFTYBANK"
+  },
+  "STARHEALTH": {
+    "instrument_key": "NSE_EQ|INE575P01011",
+    "isin": "INE575P01011",
+    "name": "STAR HEALTH AND ALLIED INSURANCE CO LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "GLAXO": {
+    "instrument_key": "NSE_EQ|INE159A01016",
+    "isin": "INE159A01016",
+    "name": "GLAXOSMITHKLINE PHARMACEUTICALS LTD",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "CRISIL": {
+    "instrument_key": "NSE_EQ|INE007A01025",
+    "isin": "INE007A01025",
+    "name": "CRISIL LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "MANYAVAR": {
+    "instrument_key": "NSE_EQ|INE825V01034",
+    "isin": "INE825V01034",
+    "name": "VEDANT FASHIONS LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "ZFCVINDIA": {
+    "instrument_key": "NSE_EQ|INE755A01025",
+    "isin": "INE755A01025",
+    "name": "ZF COMMERCIAL VEHICLE CONTROL SYSTEMS INDIA LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "JKCEMENT": {
+    "instrument_key": "NSE_EQ|INE823G01014",
+    "isin": "INE823G01014",
+    "name": "JK CEMENT LIMITED",
+    "primary_index": "NIFTY INFRA"
+  },
+  "ITI": {
+    "instrument_key": "NSE_EQ|INE248A01017",
+    "isin": "INE248A01017",
+    "name": "ITI LIMITED",
+    "primary_index": "NIFTYIT"
+  },
+  "ANGELONE": {
+    "instrument_key": "NSE_EQ|INE732I01013",
+    "isin": "INE732I01013",
+    "name": "ANGEL ONE LIMITED",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "KPRMILL": {
+    "instrument_key": "NSE_EQ|INE930H01031",
+    "isin": "INE930H01031",
+    "name": "K.P.R. MILL LIMITED",
+    "primary_index": "NIFTYFMCG"
+  },
+  "NAM-INDIA": {
+    "instrument_key": "NSE_EQ|INE298J01013",
+    "isin": "INE298J01013",
+    "name": "NIPPON LIFE INDIA ASSET MANAGEMENT LTD",
+    "primary_index": "NIFTYFINSERVICE"
+  },
+  "KANSAINER": {
+    "instrument_key": "NSE_EQ|INE531A01024",
+    "isin": "INE531A01024",
+    "name": "KANSAI NEROLAC PAINTS LTD",
+    "primary_index": "NIFTYFMCG"
+  },
+  "ENDURANCE": {
+    "instrument_key": "NSE_EQ|INE913H01037",
+    "isin": "INE913H01037",
+    "name": "ENDURANCE TECHNOLOGIES LTD",
+    "primary_index": "NIFTYAUTO"
+  },
+  "HINDCOPPER": {
+    "instrument_key": "NSE_EQ|INE531E01026",
+    "isin": "INE531E01026",
+    "name": "HINDUSTAN COPPER LTD",
+    "primary_index": "NIFTYMETAL"
+  },
+  "MEDANTA": {
+    "instrument_key": "NSE_EQ|INE474Q01031",
+    "isin": "INE474Q01031",
+    "name": "GLOBAL HEALTH LIMITED (MEDANTA)",
+    "primary_index": "NIFTYPHARMA"
+  },
+  "SUNDRMFAST": {
+    "instrument_key": "NSE_EQ|INE387A01021",
+    "isin": "INE387A01021",
+    "name": "SUNDRAM FASTENERS LIMITED",
+    "primary_index": "NIFTYAUTO"
+  }
+}
