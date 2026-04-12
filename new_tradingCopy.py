@@ -1771,7 +1771,7 @@ def derive_monthly_from_daily(df_daily: pd.DataFrame) -> pd.DataFrame:
     if df_daily is None or df_daily.empty:
         return pd.DataFrame()
 
-    df_month = df_daily.resample("ME").agg(
+    df_month = df_daily.resample("M").agg(
         {
             "open": "first",
             "high": "max",
@@ -1790,7 +1790,7 @@ def derive_quarterly_from_daily(df_daily: pd.DataFrame) -> pd.DataFrame:
     if df_daily is None or df_daily.empty:
         return pd.DataFrame()
 
-    df_quarter = df_daily.resample("QE").agg(
+    df_quarter = df_daily.resample("Q").agg(
         {
             "open": "first",
             "high": "max",
