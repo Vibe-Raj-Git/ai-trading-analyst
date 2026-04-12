@@ -6,9 +6,9 @@ import traceback
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
-from openai import OpenAI
+#from openai import OpenAI
 from flask import Flask, render_template, request, jsonify, session, send_file
-import httpx
+#import httpx
 import time
 import google.generativeai as genai
 
