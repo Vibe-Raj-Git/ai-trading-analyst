@@ -19,7 +19,7 @@ from zoneinfo import ZoneInfo
 import inspect, os
 from dhan_auth_totp import get_access_token
 from backend.gann_calculator import calculate_all_gann_metrics   # ← Use backend. prefix
-from openai import OpenAI  # Changed: import OpenAI instead of google.generativeai
+#from openai import OpenAI  # Changed: import OpenAI instead of google.generativeai
 from dotenv import load_dotenv
 load_dotenv()  # loads values from .env into os.environ
 
