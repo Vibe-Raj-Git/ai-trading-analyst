@@ -770,20 +770,44 @@ def extract_gann_metrics_for_anchor(gann_metrics: dict) -> str:
     gann_anchor += "\n"
     return gann_anchor
 
-def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None):
+def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, clean_output=None):
     """
     Generate Trainer explanation using actual precomputed data.
-    NO LLM CALL - pure template-based with real data.
+    NO LLM CALL - pure template-based with REAL data from extract_verified_prices.
     """
     
-    # Extract actual data
-    d_regime = regimes.get("Trend_Regime", "Unknown")
-    setup_regime = regimes.get("Setup_Regime", "Unknown")
-    entry_regime = regimes.get("Entry_Regime", "Unknown")
+    # ========== USE extract_verified_prices TO GET ALL DATA ==========
+    verified_anchor = ""
+    if clean_output:
+        verified_anchor = extract_verified_prices(clean_output)
+        print(f"DEBUG: extract_verified_prices produced {len(verified_anchor)} chars of data")
     
-    # Use provided market_stage or derive from regimes
+    # Extract values from verified anchor (or fall back to precomputed/regimes)
+    def _extract(label, default=None):
+        if verified_anchor:
+            pattern = rf"{re.escape(label)}[:\s]+([\d\.\-]+)"
+            match = re.search(pattern, verified_anchor)
+            if match:
+                return match.group(1)
+        return default
+    
+    def _extract_text(label, default=None):
+        if verified_anchor:
+            pattern = rf"{re.escape(label)}[:\s]+([A-Za-z0-9_\-]+)"
+            match = re.search(pattern, verified_anchor)
+            if match:
+                return match.group(1)
+        return default
+    
+    # Extract from verified anchor (priority) or fallback to regimes/precomputed
+    d_regime = _extract_text("Daily Regime") or regimes.get("Trend_Regime", "Unknown")
+    setup_regime = _extract_text("30M Regime") or regimes.get("Setup_Regime", "Unknown")
+    entry_regime = _extract_text("5M Regime") or regimes.get("Entry_Regime", "Unknown")
+    
+    # Market Stage
     if market_stage is None:
-        # Simple derivation if not provided
+        market_stage = _extract_text("Market Stage (Trend TF)")
+    if market_stage is None:
         if d_regime == "Bullish":
             market_stage = "Advancing"
         elif d_regime == "Bearish":
@@ -791,112 +815,171 @@ def generate_fallback_trainer_explanation(precomputed, regimes, strategies, curr
         else:
             market_stage = "Accumulation"
     
-    # Find actual support/resistance levels
-    def _to_price_list(levels):
-        vals = []
-        for l in (levels or []):
-            if isinstance(l, dict) and "price" in l:
-                try:
-                    vals.append(float(l["price"]))
-                except Exception:
-                    continue
-            elif isinstance(l, (int, float)):
-                vals.append(float(l))
-        return sorted({x for x in vals})
+    # Get ATR and current price from verified anchor
+    daily_close = _extract("Daily Close", current_price)
+    daily_atr = _extract("ATR")
     
-    support_prices = _to_price_list(supports)
-    resistance_prices = _to_price_list(resistances)
+    # Darvas Box data
+    darvas_upper = _extract("Darvas Box Upper")
+    darvas_lower = _extract("Darvas Box Lower")
+    darvas_mid = _extract("Darvas Box Mid")
+    darvas_state = _extract_text("Darvas Box State")
+    darvas_strength = _extract("Darvas Strength")
     
-    # Nearest levels (CORRECT ORDER - support below, resistance above)
-    nearest_support = None
-    nearest_resistance = None
+    # RSI Divergence section
+    rsi_section = ""
+    if verified_anchor:
+        rsi_match = re.search(r"RSI DIVERGENCE CONTEXT.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
+        if rsi_match:
+            rsi_section = rsi_match.group(0)
     
-    if support_prices:
-        supports_below = [s for s in support_prices if s < current_price]
-        if supports_below:
-            nearest_support = max(supports_below)  # Closest support BELOW price
-        else:
-            nearest_support = support_prices[-1] if support_prices else None
+    # GANN section
+    gann_section = ""
+    if verified_anchor:
+        gann_match = re.search(r"GANN METRICS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
+        if gann_match:
+            gann_section = gann_match.group(0)
     
-    if resistance_prices:
-        resistances_above = [r for r in resistance_prices if r > current_price]
-        if resistances_above:
-            nearest_resistance = min(resistances_above)  # Closest resistance ABOVE price
-        else:
-            nearest_resistance = resistance_prices[0] if resistance_prices else None
+    # F&O section
+    fo_section = ""
+    if verified_anchor:
+        fo_match = re.search(r"OPTIONS & FUTURES METRICS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
+        if fo_match:
+            fo_section = fo_match.group(0)
     
-    # Strategy types from generate_enforced_strategies
+    # Order Blocks section
+    ob_section = ""
+    if verified_anchor:
+        ob_match = re.search(r"ORDER BLOCKS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
+        if ob_match:
+            ob_section = ob_match.group(0)
+    
+    # Fibonacci section
+    fib_section = ""
+    if verified_anchor:
+        fib_match = re.search(r"FIBONACCI LEVELS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
+        if fib_match:
+            fib_section = fib_match.group(0)
+    
+    # Bollinger section
+    bb_section = ""
+    if verified_anchor:
+        bb_match = re.search(r"BOLLINGER BANDS & KELTNER CHANNELS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
+        if bb_match:
+            bb_section = bb_match.group(0)
+    
+    # Strategy types
     strategy_a_type = strategies.get("A", {}).get("type", "Pullback")
     strategy_b_type = strategies.get("B", {}).get("type", "Range-Edge Fade")
+    strategy_a_conviction = strategies.get("A", {}).get("conviction", "Medium")
+    strategy_b_conviction = strategies.get("B", {}).get("conviction", "Medium")
     
     # Determine bias description
     if d_regime == "Bullish":
         bias_desc = "bullish"
-        action_desc = "buying"
         direction = "long"
     elif d_regime == "Bearish":
         bias_desc = "bearish"
-        action_desc = "selling"
         direction = "short"
     else:
         bias_desc = "range-bound"
-        action_desc = "trading at edges"
         direction = "neutral"
     
-    # Get ATR for volatility context
-    atr_val = None
-    try:
-        daily_block = precomputed.get("DAILY", {})
-        daily_ind = daily_block.get("indicators", {})
-        atr_val = daily_ind.get("D_ATR14")
-    except Exception:
-        atr_val = None
+    # ATR percentage and volatility
+    atr_pct = 0
+    if daily_atr and daily_close:
+        try:
+            atr_pct = (float(daily_atr) / float(daily_close)) * 100
+        except:
+            pass
     
-    # Build explanation with REAL data
+    if atr_pct > 2:
+        volatility_advice = "⚠️ HIGH VOLATILITY - Widen stops by 50%, reduce position size"
+    elif atr_pct < 1:
+        volatility_advice = "📊 LOW VOLATILITY - Use tighter stops (1-1.5x ATR)"
+    else:
+        volatility_advice = "📈 NORMAL VOLATILITY - Standard position sizing (2x ATR stops)"
+    
+    # ========== BUILD THE EXPLANATION ==========
+    
     explanation = f"""
-**Big-Picture Bias and Market Condition:**
+📊 **MARKET OVERVIEW**
 
-The market is showing a {bias_desc} bias based on the Trend timeframe analysis. 
-The {market_stage} stage suggests this is a {bias_desc} continuation phase. 
-Given the current conditions, focus on {strategy_a_type.lower()} trades at key levels.
+| Metric | Value |
+|--------|-------|
+| **Bias** | {bias_desc.upper()} |
+| **Market Stage** | {market_stage} |
+| **Trend/Setup/Entry** | {d_regime} → {setup_regime} → {entry_regime} |
+| **Current Price** | {daily_close if daily_close else current_price} |
+| **ATR (Volatility)** | {daily_atr} ({atr_pct:.2f}%) |
 
-**Key Levels (FROM YOUR ACTUAL DATA):**
+---
 
-- Key Support: {nearest_support:.2f if nearest_support else 'N/A'}
-- Key Resistance: {nearest_resistance:.2f if nearest_resistance else 'N/A'}
-- Current Price: {current_price:.2f}
-- ATR (Volatility): {atr_val:.2f if atr_val else 'N/A'}
+📐 **DARVAS BOX** (Institutional Structure)
+  • Upper (Resistance): {darvas_upper if darvas_upper else 'N/A'}
+  • Lower (Support): {darvas_lower if darvas_lower else 'N/A'}
+  • Mid (Pivot): {darvas_mid if darvas_mid else 'N/A'}
+  • State: {darvas_state.upper() if darvas_state else 'N/A'}
+  • Strength: {darvas_strength if darvas_strength else 'N/A'}/10
 
-**Multi-Timeframe Read:**
+---
 
-- **Trend Timeframe**: {d_regime} condition with {market_stage} phase.
-- **Setup Timeframe**: {setup_regime} structure.
-- **Entry Timeframe**: {entry_regime} signals for timing.
+{bb_section if bb_section else '📊 **BOLLINGER BANDS**: No data available'}
 
-**Concrete Trading Stance:**
+---
 
-For {direction} bias:
-- Look for {strategy_a_type.lower()} opportunities near {nearest_support:.2f if nearest_support else 'support'} 
-- Use {strategy_b_type.lower()} as secondary entry near {nearest_resistance:.2f if nearest_resistance else 'resistance'}
-- Place stops below the nearest support level (approx {nearest_support:.2f if nearest_support else 'N/A'})
+{fib_section if fib_section else '📐 **FIBONACCI**: No levels available'}
 
-**Risk Management:**
+---
 
-Based on ATR of {atr_val:.2f if atr_val else 'N/A'}, maintain appropriate position sizing.
-Use tighter stops in choppy conditions.
+{rsi_section if rsi_section else '⚠️ **RSI DIVERGENCE**: None detected'}
 
-**What to Watch Next:**
+---
 
-- Trend Timeframe: Watch price action around {nearest_support:.2f if nearest_support else 'support'} and {nearest_resistance:.2f if nearest_resistance else 'resistance'}
-- Setup Timeframe: Look for confirmation signals
-- Entry Timeframe: Wait for price to reach key levels before entering
+{gann_section if gann_section else '📐 **GANN SIGNALS**: None detected'}
 
-**Takeaway:**
+---
 
-Focus on {strategy_a_type.lower()} trades with clear risk parameters. 
-Use the provided levels as your trading roadmap. 
-This analysis is based on actual precomputed data from your system.
+{ob_section if ob_section else '🏦 **ORDER BLOCKS**: None near current price'}
+
+---
+
+{fo_section if fo_section else '📊 **F&O METRICS**: Not available for this symbol'}
+
+---
+
+🎯 **TRADING STRATEGY**
+
+**Direction:** {direction.upper()} bias
+
+**Primary Strategy ({strategy_a_type}):**
+- Conviction: {strategy_a_conviction}
+- Focus on {strategy_a_type.lower()} opportunities
+
+**Secondary Strategy ({strategy_b_type}):**
+- Conviction: {strategy_b_conviction}
+- Use at range extremes
+
+---
+
+⚠️ **RISK MANAGEMENT**
+
+{volatility_advice}
+
+**Position Sizing:** Adjust based on volatility regime
+**Invalidation:** Close positions if price breaks key structure levels
+
+---
+
+💡 **TAKEAWAY**
+
+{direction.upper()} bias is active. Focus on {strategy_a_type.lower()} trades with clear risk parameters.
+This analysis is based on ACTUAL verified data from your system.
+
+---
+*AI service is not utilized.*
 """
+    
     return explanation
 
 def compute_quick_action(mode: str, regimes: dict | None, darvas_state: str | None = None):
@@ -1239,7 +1322,8 @@ def generate_trainer_explanation(clean_output, persona_key, is_index, precompute
             current_price=current_price,
             supports=[],
             resistances=[],
-            market_stage=market_stage
+            market_stage=market_stage,
+            clean_output=clean_output  # ✅ ADD THIS
         )
     # ========== DEBUG: Check gann_metrics received ==========
     print("=" * 80)
