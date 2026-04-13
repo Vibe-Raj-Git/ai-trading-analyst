@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            background: white;
+            min-height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        .sidebar .nav-link {
+            color: #4a5568;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin: 4px 0;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .password-strength {
+            height: 4px;
+            margin-top: 8px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 p-0">
+                <div class="sidebar p-3">
+                    <h4 class="text-center mb-4">
+                        <i class="fas fa-chart-line text-primary"></i>
+                        <span class="ms-2">Admin Panel</span>
+                    </h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="{{ url_for('admin.dashboard') }}">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                        <a class="nav-link active" href="{{ url_for('admin.users') }}">
+                            <i class="fas fa-users me-2"></i> Users
+                        </a>
+                        <a class="nav-link" href="{{ url_for('admin.activity_log') }}">
+                            <i class="fas fa-history me-2"></i> Activity Log
+                        </a>
+                        <a class="nav-link" href="{{ url_for('index') }}">
+                            <i class="fas fa-chart-line me-2"></i> Trading Dashboard
+                        </a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-10 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3><i class="fas fa-user-plus me-2"></i>Add New User</h3>
+                    <a href="{{ url_for('admin.users') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Users
+                    </a>
+                </div>
+                
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% for category, message in messages %}
+                                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                            {{ message }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                        </div>
+                                    {% endfor %}
+                                {% endwith %}
+                                
+                                <form method="POST">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Email Address</label>
+                                        <input type="email" name="email" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Username</label>
+                                        <input type="text" name="username" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control" required>
+                                        <div id="passwordStrength" class="password-strength"></div>
+                                        <small class="text-muted">8+ chars, uppercase, lowercase, number, special character</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Role</label>
+                                        <select name="role" class="form-select">
+                                            <option value="user">User</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-user-plus me-2"></i>Create User
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const passwordInput = document.getElementById('password');
+        const strengthDiv = document.getElementById('passwordStrength');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+            
+            const colors = ['#dc3545', '#dc3545', '#ffc107', '#198754', '#198754'];
+            const width = (strength / 5) * 100;
+            
+            strengthDiv.style.width = width + '%';
+            strengthDiv.style.backgroundColor = colors[strength - 1] || '#dc3545';
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Log - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            background: white;
+            min-height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        .sidebar .nav-link {
+            color: #4a5568;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin: 4px 0;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .badge-info {
+            background: #17a2b8;
+            color: white;
+        }
+        .badge-warning {
+            background: #ffc107;
+            color: #333;
+        }
+        .badge-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 p-0">
+                <div class="sidebar p-3">
+                    <h4 class="text-center mb-4">
+                        <i class="fas fa-chart-line text-primary"></i>
+                        <span class="ms-2">Admin Panel</span>
+                    </h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="{{ url_for('admin.dashboard') }}">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                        <a class="nav-link" href="{{ url_for('admin.users') }}">
+                            <i class="fas fa-users me-2"></i> Users
+                        </a>
+                        <a class="nav-link active" href="{{ url_for('admin.activity_log') }}">
+                            <i class="fas fa-history me-2"></i> Activity Log
+                        </a>
+                        <a class="nav-link" href="{{ url_for('index') }}">
+                            <i class="fas fa-chart-line me-2"></i> Trading Dashboard
+                        </a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-10 p-4">
+                <h3 class="mb-4"><i class="fas fa-history me-2"></i>User Activity Log</h3>
+                
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>User</th>
+                                        <th>Action</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for activity in activities %}
+                                    <tr>
+                                        <td style="white-space: nowrap">{{ activity[1] }}</td>
+                                        <td>
+                                            <strong>{{ activity[4] }}</strong>
+                                            {% if activity[3] == 'admin' %}
+                                                <span class="badge bg-warning ms-1">Admin</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% set action = activity[2] %}
+                                            {% if action == 'login' %}
+                                                <span class="badge bg-success"><i class="fas fa-sign-in-alt"></i> Login</span>
+                                            {% elif action == 'logout' %}
+                                                <span class="badge bg-secondary"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                                            {% elif action == 'password_change' %}
+                                                <span class="badge bg-info"><i class="fas fa-key"></i> Password Change</span>
+                                            {% elif action == 'admin_edit_user' %}
+                                                <span class="badge bg-warning"><i class="fas fa-user-edit"></i> Edit User</span>
+                                            {% elif action == 'admin_add_user' %}
+                                                <span class="badge bg-primary"><i class="fas fa-user-plus"></i> Add User</span>
+                                            {% elif action == 'admin_delete_user' %}
+                                                <span class="badge bg-danger"><i class="fas fa-user-minus"></i> Delete User</span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">{{ action }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ activity[3] or '-' }}</td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-4">
+                                            <i class="fas fa-history fa-2x mb-2 d-block"></i>
+                                            No activity recorded
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                {% if total > per_page %}
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if page > 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('admin.activity_log', page=page-1) }}">
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for p in range(1, (total // per_page) + 2) %}
+                            {% if p == page %}
+                            <li class="page-item active"><a class="page-link" href="#">{{ p }}</a></li>
+                            {% elif p <= page + 3 and p >= page - 3 %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin.activity_log', page=p) }}">{{ p }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page < (total // per_page) + 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('admin.activity_log', page=page+1) }}">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

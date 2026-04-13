@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - AI Trading Analyst</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: none;
+        }
+        .card-header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+        .password-strength {
+            height: 4px;
+            margin-top: 8px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <!-- Navigation -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Trading Dashboard
+            </a>
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+            </a>
+        </div>
+        
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <i class="fas fa-user-circle fa-5x"></i>
+                </div>
+                <div class="col-md-10">
+                    <h2 class="mb-1">{{ user[1] }}</h2>
+                    <p class="mb-2">{{ user[0] }}</p>
+                    <span class="badge bg-light text-dark px-3 py-2">
+                        <i class="fas fa-shield-alt me-1"></i> Role: {{ user[2] | upper }}
+                    </span>
+                    <span class="badge bg-{{ 'success' if user[5] else 'warning' }} px-3 py-2 ms-2">
+                        <i class="fas fa-{{ 'check-circle' if user[5] else 'clock' }} me-1"></i>
+                        {{ 'Verified' if user[5] else 'Email Not Verified' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Account Info -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle me-2"></i>Account Information
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td class="text-muted" style="width: 40%;">Email:</td>
+                                <td><strong>{{ user[0] }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">Username:</td>
+                                <td><strong>{{ user[1] }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">Role:</td>
+                                <td><span class="badge bg-{{ 'warning' if user[2] == 'admin' else 'secondary' }}">{{ user[2] }}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">Member Since:</td>
+                                <td>{{ user[3] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">Last Login:</td>
+                                <td>{{ user[4] if user[4] else 'Never' }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Change Password -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-key me-2"></i>Change Password
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ url_for('auth.change_password') }}">
+                            <div class="mb-3">
+                                <label class="form-label">Current Password</label>
+                                <input type="password" name="current_password" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">New Password</label>
+                                <input type="password" name="new_password" id="new_password" class="form-control" required>
+                                <div id="passwordStrength" class="password-strength"></div>
+                                <small class="text-muted">8+ chars, uppercase, lowercase, number, special character</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" name="confirm_password" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-save me-2"></i>Update Password
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Login History -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-history me-2"></i>Recent Login History
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for history in login_history %}
+                            <tr>
+                                <td>{{ history[0] }}</td>
+                                <td>{{ history[1] }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="2" class="text-center text-muted py-4">No login history found</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const passwordInput = document.getElementById('new_password');
+        if (passwordInput) {
+            const strengthDiv = document.getElementById('passwordStrength');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                
+                if (password.length >= 8) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+                
+                const colors = ['#dc3545', '#dc3545', '#ffc107', '#198754', '#198754'];
+                const width = (strength / 5) * 100;
+                
+                strengthDiv.style.width = width + '%';
+                strengthDiv.style.backgroundColor = colors[strength - 1] || '#dc3545';
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
