@@ -10219,8 +10219,135 @@ def analyze(
         darvas_context=darvas_context,
     )
 
-    llm_text = call_gemini(prompt)
+    # Store the original engine output before Gemini call (for fallback)
+    # Store the original engine output before Gemini call (for fallback)
+    # This format MUST match what extract_verified_prices expects
+    engine_output = f"""
+ENTRY_Close
+{ind_entry.get('close', ind_entry.get('Close', 'N/A'))}
+SETUP_Close
+{ind_setup.get('M30_Close', ind_setup.get('Close', 'N/A'))}
+TREND_Close
+{ind_trend.get('D_Close', ind_trend.get('Close', 'N/A'))}
+DAILY_Close
+{ind_daily.get('D_Close', ind_daily.get('Close', 'N/A'))}
+WEEKLY_Close
+{weekly_ind.get('W_Close', weekly_ind.get('Close', 'N/A'))}
+MONTHLY_Close
+{monthly_ind.get('MN_Close', monthly_ind.get('Close', 'N/A'))}
 
+DAILY_High
+{ind_daily.get('D_High', ind_daily.get('High', 'N/A'))}
+DAILY_Low
+{ind_daily.get('D_Low', ind_daily.get('Low', 'N/A'))}
+DAILY_Open
+{ind_daily.get('D_Open', ind_daily.get('Open', 'N/A'))}
+
+WEEKLY_High
+{weekly_ind.get('W_High', weekly_ind.get('High', 'N/A'))}
+WEEKLY_Low
+{weekly_ind.get('W_Low', weekly_ind.get('Low', 'N/A'))}
+
+MONTHLY_High
+{monthly_ind.get('MN_High', monthly_ind.get('High', 'N/A'))}
+MONTHLY_Low
+{monthly_ind.get('MN_Low', monthly_ind.get('Low', 'N/A'))}
+
+# ===== EMAs =====
+EMA10: {ind_trend.get('D_EMA10', ind_trend.get('EMA10', 'N/A'))}
+EMA20: {ind_trend.get('D_EMA20', ind_trend.get('EMA20', 'N/A'))}
+EMA50: {ind_trend.get('D_EMA50', ind_trend.get('EMA50', 'N/A'))}
+EMA100: {ind_trend.get('D_EMA100', ind_trend.get('EMA100', 'N/A'))}
+EMA200: {ind_trend.get('D_EMA200', ind_trend.get('EMA200', 'N/A'))}
+
+# ===== Momentum =====
+RSI14: {ind_trend.get('D_RSI14', ind_trend.get('RSI14', 'N/A'))}
+MACD: {ind_trend.get('D_MACD', ind_trend.get('MACD', 'N/A'))}
+MACD_signal: {ind_trend.get('D_MACD_signal', ind_trend.get('MACD_signal', 'N/A'))}
+MACD_hist: {ind_trend.get('D_MACD_hist', ind_trend.get('MACD_hist', 'N/A'))}
+
+# ===== Trend & Volatility =====
+ADX14: {ind_trend.get('D_ADX14', ind_trend.get('ADX14', 'N/A'))}
+ATR: {ind_trend.get('D_ATR14', ind_trend.get('ATR14', 'N/A'))}
++DI: {ind_trend.get('D_DI_PLUS', ind_trend.get('DI_PLUS', 'N/A'))}
+-DI: {ind_trend.get('D_DI_MINUS', ind_trend.get('DI_MINUS', 'N/A'))}
+
+# ===== Bollinger Bands =====
+BB_mid: {ind_trend.get('D_BB_mid', ind_trend.get('BB_mid', 'N/A'))}
+BB_high: {ind_trend.get('D_BB_hi', ind_trend.get('BB_hi', 'N/A'))}
+BB_low: {ind_trend.get('D_BB_lo', ind_trend.get('BB_lo', 'N/A'))}
+
+# ===== Keltner Channels =====
+KC_mid: {ind_trend.get('D_KC_mid', ind_trend.get('KC_mid', 'N/A'))}
+KC_upper: {ind_trend.get('D_KC_upper', ind_trend.get('KC_upper', 'N/A'))}
+KC_lower: {ind_trend.get('D_KC_lower', ind_trend.get('KC_lower', 'N/A'))}
+
+# ===== Regimes =====
+Daily Regime: {d_regime if d_regime else 'N/A'}
+Weekly Regime: {w_regime if w_regime else 'N/A'}
+30M Regime: {m30_regime if m30_regime else 'N/A'}
+5M Regime: {m5_regime if m5_regime else 'N/A'}
+
+# ===== Range Scores =====
+Daily RangeScore: {ind_trend.get('D_RangeScore', ind_trend.get('RangeScore', 'N/A'))}
+Weekly RangeScore: {weekly_ind.get('W_RangeScore', 'N/A')}
+30M RangeScore: {ind_setup.get('M30_RangeScore', 'N/A')}
+
+# ===== RSI Divergence =====
+30M RSI Divergence Type: {ms_trend.get('rsi_divergence_type', 'none')}
+30M RSI Divergence Strength: {ms_trend.get('rsi_divergence_strength', 0)}
+1H RSI Divergence Type: {precomputed.get('1H', {}).get('market_structure', {}).get('rsi_divergence_type', 'none')}
+1H RSI Divergence Strength: {precomputed.get('1H', {}).get('market_structure', {}).get('rsi_divergence_strength', 0)}
+Weekly RSI Divergence Type: {weekly_ms.get('rsi_divergence_type', 'none')}
+Weekly RSI Divergence Strength: {weekly_ms.get('rsi_divergence_strength', 0)}
+
+# ===== Relative Strength =====
+Daily RS Bucket: {ind_trend.get('D_RS_bucket', 'Neutral')}
+Weekly RS Bucket: {weekly_ind.get('W_RS_bucket', 'Neutral')}
+"""
+
+    # Add Darvas info to engine output (in format extract_verified_prices expects)
+    if darvas_context:
+        engine_output += f"""
+# ===== DARVAS BOX =====
+Darvas Box Upper: {darvas_context.get('upper', 'N/A')}
+Darvas Box Lower: {darvas_context.get('lower', 'N/A')}
+Darvas Box Mid: {darvas_context.get('mid', 'N/A')}
+Darvas Box State: {darvas_context.get('state', 'inside')}
+Darvas Strength: {darvas_context.get('strength', 0)}
+Darvas Reliability: {darvas_context.get('reliability', 'Low')}
+"""
+
+    # Add F&O metrics if available
+    if fo_metrics:
+        front = fo_metrics.get('front', {})
+        fo_signals = front.get('fo_signals', {})
+        engine_output += f"""
+# ===== F&O METRICS =====
+ATM IV: {front.get('atm_iv_call', 'N/A')}
+PCR: {front.get('pcr_oi', 'N/A')}
+ATM CE Delta: {front.get('atm_ce_delta', 'N/A')}
+ATM PE Delta: {front.get('atm_pe_delta', 'N/A')}
+Gamma: {front.get('atm_ce_gamma', 'N/A')}
+Vega: {front.get('atm_ce_vega', 'N/A')}
+Delta Bias: {fo_signals.get('delta_bias', 'N/A')}
+Gamma Exposure: {fo_signals.get('gamma_exposure', 'N/A')}
+Liquidity Grade: {fo_signals.get('liquidity_grade', 'N/A')}
+"""
+
+    print(f"DEBUG: engine_output length: {len(engine_output)} chars")
+    print(f"DEBUG: engine_output preview: {engine_output[:500]}")
+
+    try:
+        llm_text = call_gemini(prompt)
+        # If Gemini returns an error message, use engine output instead
+        if llm_text and ("Error calling Gemini" in llm_text or "API key expired" in llm_text):
+            print("Gemini returned error, using engine output as fallback")
+            llm_text = engine_output
+    except Exception as e:
+        print(f"Gemini call failed: {e}, using engine output")
+        llm_text = engine_output
+    
     current_price = (
         ind_entry.get("close")
         or ind_entry.get("Close")
