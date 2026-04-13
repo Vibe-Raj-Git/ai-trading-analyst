@@ -1213,9 +1213,34 @@ def get_trainer_key(stock, mode):
 # ======================================================
 # Trainer Explanation Generation with Full Prompt
 # ======================================================
-def generate_trainer_explanation(clean_output, persona_key, is_index, precomputed, verified_prices_anchor, fo_snapshot, fo_decision_snapshot, rs_snapshot, gann_metrics, market_stage=None):
+def generate_trainer_explanation(clean_output, persona_key, is_index, precomputed, verified_prices_anchor, fo_snapshot, fo_decision_snapshot, rs_snapshot, gann_metrics, regimes=None, market_stage=None):
     """Generate trainer explanation using Gemini (primary) - converts technical to beginner-friendly"""
+
+    # ✅ CHECK API KEY FIRST - NO HARDCODING
+    GENAI_API_KEY = os.environ.get("GENAI_API_KEY") or ""
     
+    if not GENAI_API_KEY or GENAI_API_KEY == "":
+        print("DEBUG WARNING: GENAI_API_KEY not set! Using fallback explanation.")
+        
+        # Get current price based on persona
+        if persona_key in ("positional", "position"):
+            current_price = precomputed.get("MONTHLY", {}).get("indicators", {}).get("MN_Close", 0)
+        elif persona_key in ("investing", "investment"):
+            current_price = precomputed.get("QUARTERLY", {}).get("indicators", {}).get("Q_Close", 0)
+        elif persona_key == "swing":
+            current_price = precomputed.get("WEEKLY", {}).get("indicators", {}).get("W_Close", 0)
+        else:
+            current_price = precomputed.get("DAILY", {}).get("indicators", {}).get("D_Close", 0)
+        
+        return generate_fallback_trainer_explanation(
+            precomputed=precomputed,
+            regimes=regimes,
+            strategies={},
+            current_price=current_price,
+            supports=[],
+            resistances=[],
+            market_stage=market_stage
+        )
     # ========== DEBUG: Check gann_metrics received ==========
     print("=" * 80)
     print("DEBUG INSIDE generate_trainer_explanation: gann_metrics received:")
@@ -2398,10 +2423,45 @@ Here is the analysis:
         # ==================================
         
         return response.text
-        
     except Exception as e:
         print(f"ERROR: Gemini trainer explanation failed: {e}")
-        raise
+        print("Falling back to template-based explanation using precomputed data...")
+        
+        # Get current price based on persona (NOT hardcoded to Daily)
+        try:
+            if persona_key in ("positional", "position"):
+                current_price = precomputed.get("MONTHLY", {}).get("indicators", {}).get("MN_Close", 0)
+            elif persona_key in ("investing", "investment"):
+                current_price = precomputed.get("QUARTERLY", {}).get("indicators", {}).get("Q_Close", 0)
+            elif persona_key == "swing":
+                current_price = precomputed.get("WEEKLY", {}).get("indicators", {}).get("W_Close", 0)
+            else:
+                current_price = precomputed.get("DAILY", {}).get("indicators", {}).get("D_Close", 0)
+        except Exception as price_err:
+            print(f"DEBUG: Could not extract current_price: {price_err}")
+            current_price = 0
+        
+        # Get regimes (already available)
+        regimes_local = regimes if 'regimes' in locals() else {}
+        
+        # Get strategies (if available)
+        strategies_local = {}
+        try:
+            if 'final_strategies' in locals():
+                strategies_local = final_strategies
+        except:
+            pass
+        
+        # Call persona-aware fallback
+        return generate_fallback_trainer_explanation(
+            precomputed=precomputed,
+            regimes=regimes_local,
+            strategies=strategies_local,
+            current_price=current_price,
+            supports=[],
+            resistances=[],
+            market_stage=market_stage
+        )
 
 def extract_balanced_json(text):
     """Extract first valid JSON object/array from arbitrary text.
@@ -4767,6 +4827,7 @@ YOU MUST USE THESE EXACT NUMBERS IN YOUR ANALYSIS.
                 fo_decision_snapshot=fo_decision_snapshot,
                 rs_snapshot=rs_snapshot,
                 gann_metrics=gann_metrics,
+                regimes=regimes,  # ✅ ADD THIS
                 market_stage=market_stage  # ✅ Make sure this is passed correctly
             )
             print(f"DEBUG: Primary trainer succeeded - length: {len(trainer_explanation)} chars")
