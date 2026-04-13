@@ -354,6 +354,17 @@ def extract_verified_prices(section1_output: str) -> str:
         match = re.search(pattern, section1_output, FLAGS)
         if match:
             extracted_data[label] = match.group(1).strip()
+    # ========== DEBUG: Print extracted data ==========
+    print("=" * 60)
+    print("DEBUG: extract_verified_prices - extraction results:")
+    print(f"Total extracted items: {len(extracted_data)}")
+    if extracted_data:
+        print("Sample of extracted data (first 10 items):")
+        for i, (key, value) in enumerate(list(extracted_data.items())[:10]):
+            print(f"  {key}: {value}")
+    else:
+        print("WARNING: No data extracted! Check if patterns match the raw_output format.")
+    print("=" * 60)
 
     # Build the comprehensive verified anchor
     if not extracted_data:
@@ -620,7 +631,12 @@ def extract_verified_prices(section1_output: str) -> str:
         "=" * 80,
     ])
 
-    return "\n".join(anchor_lines)
+    # ========== DEBUG: Print final anchor length ==========
+    final_anchor = "\n".join(anchor_lines)
+    print(f"DEBUG: extract_verified_prices - final anchor length: {len(final_anchor)} chars")
+    print(f"DEBUG: final anchor first 500 chars: {final_anchor[:500]}")
+    
+    return final_anchor  # ✅ Only one return at the end
 
 def extract_darvas_direct(text: str) -> dict:
     """Extract Darvas box data directly from debug output format"""
@@ -771,16 +787,19 @@ def extract_gann_metrics_for_anchor(gann_metrics: dict) -> str:
     return gann_anchor
 
 def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, clean_output=None, raw_output=None):
-    """
-    Generate Trainer explanation using extract_verified_prices() rich data.
-    Formats the data for HUMAN readability, not just LLM consumption.
-    """
     
+    # ========== DEBUG: Check raw_output ==========
     print("=" * 60)
-    print("FALLBACK: Trying to extract verified data from raw_output")
-    print(f"raw_output exists: {raw_output is not None}")
+    print("DEBUG: generate_fallback_trainer_explanation called")
+    print(f"raw_output type: {type(raw_output)}")
     print(f"raw_output length: {len(raw_output) if raw_output else 0}")
+    if raw_output:
+        print(f"raw_output first 300 chars: {raw_output[:300]}")
+    else:
+        print("ERROR: raw_output is None or empty in fallback!")
     print("=" * 60)
+    
+    # Rest of your function...
     
     # If we have raw_output, extract the rich data
     if raw_output:
@@ -1218,7 +1237,21 @@ def get_trainer_key(stock, mode):
 # Trainer Explanation Generation with Full Prompt
 # ======================================================
 def generate_trainer_explanation(clean_output, raw_output, persona_key, is_index, precomputed, verified_prices_anchor, fo_snapshot, fo_decision_snapshot, rs_snapshot, gann_metrics, regimes=None, market_stage=None):
-    """Generate trainer explanation using Gemini (primary) - converts technical to beginner-friendly"""
+    """Generate trainer explanation using Gemini (primary)"""
+    
+    # ========== DEBUG: Check raw_output ==========
+    print("=" * 60)
+    print("DEBUG: generate_trainer_explanation called")
+    print(f"raw_output is None: {raw_output is None}")
+    print(f"raw_output type: {type(raw_output)}")
+    print(f"raw_output length: {len(raw_output) if raw_output else 0}")
+    if raw_output:
+        print(f"raw_output first 500 chars: {repr(raw_output[:500])}")
+    else:
+        print("ERROR: raw_output is None or empty!")
+    print("=" * 60)
+    
+    # Rest of your code...
 
     # ✅ CHECK API KEY FIRST - NO HARDCODING
     GENAI_API_KEY = os.environ.get("GENAI_API_KEY") or ""
