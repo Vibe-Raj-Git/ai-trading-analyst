@@ -770,7 +770,7 @@ def extract_gann_metrics_for_anchor(gann_metrics: dict) -> str:
     gann_anchor += "\n"
     return gann_anchor
 
-def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, clean_output=None):
+def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, raw_output=None):
     """
     Generate Trainer explanation using actual precomputed data.
     NO LLM CALL - pure template-based with REAL data from extract_verified_prices.
@@ -778,8 +778,8 @@ def generate_fallback_trainer_explanation(precomputed, regimes, strategies, curr
     
     # ========== USE extract_verified_prices TO GET ALL DATA ==========
     verified_anchor = ""
-    if clean_output:
-        verified_anchor = extract_verified_prices(clean_output)
+    if raw_output:
+        verified_anchor = extract_verified_prices(raw_output)
         print(f"DEBUG: extract_verified_prices produced {len(verified_anchor)} chars of data")
     
     # Extract values from verified anchor (or fall back to precomputed/regimes)
@@ -1296,7 +1296,7 @@ def get_trainer_key(stock, mode):
 # ======================================================
 # Trainer Explanation Generation with Full Prompt
 # ======================================================
-def generate_trainer_explanation(clean_output, persona_key, is_index, precomputed, verified_prices_anchor, fo_snapshot, fo_decision_snapshot, rs_snapshot, gann_metrics, regimes=None, market_stage=None):
+def generate_trainer_explanation(clean_output, raw_output, persona_key, is_index, precomputed, verified_prices_anchor, fo_snapshot, fo_decision_snapshot, rs_snapshot, gann_metrics, regimes=None, market_stage=None):
     """Generate trainer explanation using Gemini (primary) - converts technical to beginner-friendly"""
 
     # ✅ CHECK API KEY FIRST - NO HARDCODING
@@ -1323,7 +1323,7 @@ def generate_trainer_explanation(clean_output, persona_key, is_index, precompute
             supports=[],
             resistances=[],
             market_stage=market_stage,
-            clean_output=clean_output  # ✅ ADD THIS
+            raw_output=raw_output  # ✅ Pass raw output, not cleaned
         )
     # ========== DEBUG: Check gann_metrics received ==========
     print("=" * 80)
@@ -4903,6 +4903,7 @@ YOU MUST USE THESE EXACT NUMBERS IN YOUR ANALYSIS.
         try:
             trainer_explanation = generate_trainer_explanation(
                 clean_output=clean_output,
+                raw_output=output_text,  # ✅ Pass the raw engine output
                 persona_key=persona_key,
                 is_index=is_index,
                 precomputed=precomputed,
