@@ -786,6 +786,124 @@ def extract_gann_metrics_for_anchor(gann_metrics: dict) -> str:
     gann_anchor += "\n"
     return gann_anchor
 
+def format_verified_anchor_for_humans(verified_anchor, regimes, market_stage):
+    """Convert verified anchor to readable format"""
+    
+    import re
+    
+    # Extract values using regex
+    def extract(label):
+        pattern = rf"{re.escape(label)}[:\s]+([\d\.\-]+)"
+        match = re.search(pattern, verified_anchor)
+        return match.group(1) if match else "N/A"
+    
+    def extract_text(label):
+        pattern = rf"{re.escape(label)}[:\s]+([A-Za-z0-9_\-]+)"
+        match = re.search(pattern, verified_anchor)
+        return match.group(1) if match else "N/A"
+    
+    # Extract all data
+    daily_close = extract("Daily Close")
+    daily_high = extract("Daily High")
+    daily_low = extract("Daily Low")
+    daily_atr = extract("ATR")
+    
+    darvas_upper = extract("Darvas Box Upper")
+    darvas_lower = extract("Darvas Box Lower")
+    darvas_state = extract_text("Darvas Box State")
+    darvas_strength = extract("Darvas Strength")
+    
+    # RSI Divergence
+    rsi_lines = []
+    if "30M RSI Divergence Type: bearish" in verified_anchor:
+        rsi_lines.append("  • 30-Minute: BEARISH divergence")
+    if "1H RSI Divergence Type: bearish" in verified_anchor:
+        rsi_lines.append("  • 1-Hour: BEARISH divergence")
+    if "Weekly RSI Divergence Type: bearish" in verified_anchor:
+        rsi_lines.append("  • Weekly: BEARISH divergence")
+    rsi_text = "\n".join(rsi_lines) if rsi_lines else "  • None detected"
+    
+    # GANN signals
+    gann_lines = []
+    if "Wednesday made weekly high" in verified_anchor:
+        gann_lines.append("  • Wednesday weekly high → Downtrend signal")
+    if "Double bottom detected" in verified_anchor:
+        gann_lines.append("  • Monthly DOUBLE BOTTOM detected")
+    if "Double top detected" in verified_anchor:
+        gann_lines.append("  • Monthly DOUBLE TOP detected")
+    gann_text = "\n".join(gann_lines) if gann_lines else "  • No GANN signals"
+    
+    # Regime
+    d_regime = extract_text("Daily Regime") or regimes.get("Trend_Regime", "Unknown")
+    direction = "LONG" if d_regime == "Bullish" else "SHORT" if d_regime == "Bearish" else "NEUTRAL"
+    
+    # ATR percentage
+    atr_pct = 0
+    if daily_atr != "N/A" and daily_close != "N/A":
+        try:
+            atr_pct = (float(daily_atr) / float(daily_close)) * 100
+        except:
+            pass
+    
+    if atr_pct > 2:
+        vol_advice = "⚠️ HIGH VOLATILITY - Widen stops"
+    elif atr_pct < 1:
+        vol_advice = "📊 LOW VOLATILITY - Tighter stops"
+    else:
+        vol_advice = "📈 NORMAL VOLATILITY - Standard stops"
+    
+    # Build output
+    return f"""
+📊 **MARKET SUMMARY**
+
+| Metric | Value |
+|--------|-------|
+| **Direction** | {direction} |
+| **Market Stage** | {market_stage if market_stage else 'Accumulation'} |
+| **Price** | {daily_close} |
+| **Range** | {daily_low} - {daily_high} |
+| **ATR** | {daily_atr} ({atr_pct:.2f}%) |
+| **Volatility** | {vol_advice} |
+
+---
+
+📐 **DARVAS BOX**
+
+| Level | Price |
+|-------|-------|
+| **Upper** | {darvas_upper} |
+| **Lower** | {darvas_lower} |
+| **Position** | {darvas_state.upper() if darvas_state != 'N/A' else 'INSIDE'} |
+| **Strength** | {darvas_strength}/10 |
+
+---
+
+⚠️ **RSI DIVERGENCE**
+{rsi_text}
+
+---
+
+📐 **GANN SIGNALS**
+{gann_text}
+
+---
+
+🎯 **STRATEGY**
+
+**Direction:** {direction}
+
+Focus on {direction.lower()} opportunities.
+
+---
+
+⚠️ **RISK**
+
+{vol_advice}
+
+---
+*AI service unavailable. Analysis based on computed data.*
+"""
+
 def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, clean_output=None, raw_output=None):
     
     # ========== DEBUG: Check raw_output ==========
