@@ -771,157 +771,116 @@ def extract_gann_metrics_for_anchor(gann_metrics: dict) -> str:
     return gann_anchor
 
 def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, clean_output=None, raw_output=None):
+    """
+    Generate Trainer explanation using actual precomputed data.
+    NO LLM CALL - uses precomputed dictionary directly.
+    """
     
-    print("=" * 80)
-    print("FALLBACK DEBUG - Checking raw_output:")
-    print(f"  raw_output is None: {raw_output is None}")
-    print(f"  raw_output length: {len(raw_output) if raw_output else 0}")
-    print(f"  clean_output length: {len(clean_output) if clean_output else 0}")
-    print("=" * 80)
+    # ========== EXTRACT DATA DIRECTLY FROM PRECOMPUTED ==========
     
-    if raw_output:
-        print("raw_output first 1000 chars:")
-        print(raw_output[:1000])
-        print("=" * 80)
-        
-        # Check for key data
-        print("Checking raw_output for key data:")
-        print(f"  Contains 'Darvas': {'Darvas' in raw_output}")
-        print(f"  Contains 'DARVAS': {'DARVAS' in raw_output}")
-        print(f"  Contains 'GANN': {'GANN' in raw_output}")
-        print(f"  Contains 'ATR': {'ATR' in raw_output}")
-        print(f"  Contains 'RSI Divergence': {'RSI Divergence' in raw_output}")
-        print("=" * 80)
+    # Daily data
+    daily_block = precomputed.get("DAILY", {})
+    daily_ind = daily_block.get("indicators", {})
+    daily_ms = daily_block.get("market_structure", {})
     
-    # Then call extract_verified_prices
-    if raw_output:
-        verified_anchor = extract_verified_prices(raw_output)
-        print(f"verified_anchor length: {len(verified_anchor)}")
-        if verified_anchor:
-            print(f"verified_anchor preview: {verified_anchor[:500]}")
-    else:
-        print("WARNING: raw_output is None - cannot extract verified data!")
-        verified_anchor = ""
+    # Weekly data
+    weekly_block = precomputed.get("WEEKLY", {})
+    weekly_ind = weekly_block.get("indicators", {})
+    weekly_ms = weekly_block.get("market_structure", {})
     
-    # Extract values from verified anchor (or fall back to precomputed/regimes)
-    def _extract(label, default=None):
-        if verified_anchor:
-            pattern = rf"{re.escape(label)}[:\s]+([\d\.\-]+)"
-            match = re.search(pattern, verified_anchor)
-            if match:
-                return match.group(1)
-        return default
+    # Monthly data
+    monthly_block = precomputed.get("MONTHLY", {})
+    monthly_ind = monthly_block.get("indicators", {})
     
-    def _extract_text(label, default=None):
-        if verified_anchor:
-            pattern = rf"{re.escape(label)}[:\s]+([A-Za-z0-9_\-]+)"
-            match = re.search(pattern, verified_anchor)
-            if match:
-                return match.group(1)
-        return default
+    # Current price (use from precomputed, not parameter)
+    current_price = daily_ind.get("D_Close", current_price)
     
-    # Extract from verified anchor (priority) or fallback to regimes/precomputed
-    d_regime = _extract_text("Daily Regime") or regimes.get("Trend_Regime", "Unknown")
-    setup_regime = _extract_text("30M Regime") or regimes.get("Setup_Regime", "Unknown")
-    entry_regime = _extract_text("5M Regime") or regimes.get("Entry_Regime", "Unknown")
+    # ATR and volatility
+    daily_atr = daily_ind.get("D_ATR14")
+    daily_atr_pct = 0
+    if daily_atr and current_price:
+        try:
+            daily_atr_pct = (float(daily_atr) / float(current_price)) * 100
+        except:
+            pass
+    
+    # Darvas Box
+    darvas_box = daily_ms.get("darvas_box", {})
+    darvas_valid = darvas_box.get("is_valid_classical_darvas", False)
+    darvas_upper = darvas_box.get("upper")
+    darvas_lower = darvas_box.get("lower")
+    darvas_mid = darvas_box.get("mid")
+    darvas_state = darvas_box.get("state", "inside")
+    darvas_strength = darvas_box.get("darvas_strength", 0)
+    
+    # RSI Divergence
+    rsi_divergences = []
+    tf_map = {"30M": "30-Minute", "1H": "1-Hour", "DAILY": "Daily", "WEEKLY": "Weekly"}
+    for tf, tf_label in tf_map.items():
+        tf_data = precomputed.get(tf, {})
+        if tf_data:
+            ms = tf_data.get("market_structure", {})
+            div_type = ms.get("rsi_divergence_type")
+            div_strength = ms.get("rsi_divergence_strength", 0)
+            if div_type and div_type != "none" and div_strength > 0:
+                rsi_divergences.append(f"  • {tf_label}: {div_type.upper()} (strength: {div_strength:.2f})")
+    
+    rsi_text = "\n".join(rsi_divergences) if rsi_divergences else "  • None detected"
+    
+    # GANN Metrics
+    gann = precomputed.get("GANN_METRICS", {})
+    gann_lines = []
+    weekly_patterns = gann.get("weekly_patterns", {})
+    if weekly_patterns.get("friday_weekly_high"):
+        gann_lines.append(f"  • Friday made weekly high → Next week bias: {weekly_patterns.get('next_week_bias', 'Bullish')}")
+    monthly_patterns = gann.get("monthly_patterns", {})
+    if monthly_patterns.get("double_bottom"):
+        gann_lines.append(f"  • Monthly DOUBLE BOTTOM detected ({monthly_patterns.get('gap_months', 0)} months gap)")
+    if monthly_patterns.get("double_top"):
+        gann_lines.append(f"  • Monthly DOUBLE TOP detected ({monthly_patterns.get('gap_months', 0)} months gap)")
+    
+    gann_text = "\n".join(gann_lines) if gann_lines else "  • No GANN signals detected"
+    
+    # Regimes
+    d_regime = regimes.get("Trend_Regime", daily_ind.get("D_Regime", "Unknown"))
+    setup_regime = regimes.get("Setup_Regime", "Unknown")
+    entry_regime = regimes.get("Entry_Regime", "Unknown")
     
     # Market Stage
     if market_stage is None:
-        market_stage = _extract_text("Market Stage (Trend TF)")
-    if market_stage is None:
+        market_stage = "Accumulation"
         if d_regime == "Bullish":
             market_stage = "Advancing"
         elif d_regime == "Bearish":
             market_stage = "Declining"
-        else:
-            market_stage = "Accumulation"
-    
-    # Get ATR and current price from verified anchor
-    daily_close = _extract("Daily Close", current_price)
-    daily_atr = _extract("ATR")
-    
-    # Darvas Box data
-    darvas_upper = _extract("Darvas Box Upper")
-    darvas_lower = _extract("Darvas Box Lower")
-    darvas_mid = _extract("Darvas Box Mid")
-    darvas_state = _extract_text("Darvas Box State")
-    darvas_strength = _extract("Darvas Strength")
-    
-    # RSI Divergence section
-    rsi_section = ""
-    if verified_anchor:
-        rsi_match = re.search(r"RSI DIVERGENCE CONTEXT.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
-        if rsi_match:
-            rsi_section = rsi_match.group(0)
-    
-    # GANN section
-    gann_section = ""
-    if verified_anchor:
-        gann_match = re.search(r"GANN METRICS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
-        if gann_match:
-            gann_section = gann_match.group(0)
-    
-    # F&O section
-    fo_section = ""
-    if verified_anchor:
-        fo_match = re.search(r"OPTIONS & FUTURES METRICS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
-        if fo_match:
-            fo_section = fo_match.group(0)
-    
-    # Order Blocks section
-    ob_section = ""
-    if verified_anchor:
-        ob_match = re.search(r"ORDER BLOCKS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
-        if ob_match:
-            ob_section = ob_match.group(0)
-    
-    # Fibonacci section
-    fib_section = ""
-    if verified_anchor:
-        fib_match = re.search(r"FIBONACCI LEVELS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
-        if fib_match:
-            fib_section = fib_match.group(0)
-    
-    # Bollinger section
-    bb_section = ""
-    if verified_anchor:
-        bb_match = re.search(r"BOLLINGER BANDS & KELTNER CHANNELS.*?(?=={80}|\Z)", verified_anchor, re.DOTALL)
-        if bb_match:
-            bb_section = bb_match.group(0)
     
     # Strategy types
     strategy_a_type = strategies.get("A", {}).get("type", "Pullback")
     strategy_b_type = strategies.get("B", {}).get("type", "Range-Edge Fade")
-    strategy_a_conviction = strategies.get("A", {}).get("conviction", "Medium")
-    strategy_b_conviction = strategies.get("B", {}).get("conviction", "Medium")
     
-    # Determine bias description
-    if d_regime == "Bullish":
-        bias_desc = "bullish"
-        direction = "long"
-    elif d_regime == "Bearish":
-        bias_desc = "bearish"
-        direction = "short"
-    else:
-        bias_desc = "range-bound"
-        direction = "neutral"
-    
-    # ATR percentage and volatility
-    atr_pct = 0
-    if daily_atr and daily_close:
-        try:
-            atr_pct = (float(daily_atr) / float(daily_close)) * 100
-        except:
-            pass
-    
-    if atr_pct > 2:
+    # Volatility advice
+    if daily_atr_pct > 2:
         volatility_advice = "⚠️ HIGH VOLATILITY - Widen stops by 50%, reduce position size"
-    elif atr_pct < 1:
+        volatility_badge = "HIGH"
+    elif daily_atr_pct < 1:
         volatility_advice = "📊 LOW VOLATILITY - Use tighter stops (1-1.5x ATR)"
+        volatility_badge = "LOW"
     else:
         volatility_advice = "📈 NORMAL VOLATILITY - Standard position sizing (2x ATR stops)"
+        volatility_badge = "NORMAL"
     
-    # ========== BUILD THE EXPLANATION ==========
+    # Direction
+    if d_regime == "Bullish":
+        direction = "LONG"
+        bias_desc = "bullish"
+    elif d_regime == "Bearish":
+        direction = "SHORT"
+        bias_desc = "bearish"
+    else:
+        direction = "NEUTRAL"
+        bias_desc = "range-bound"
+    
+    # ========== BUILD EXPLANATION ==========
     
     explanation = f"""
 📊 **MARKET OVERVIEW**
@@ -931,54 +890,39 @@ def generate_fallback_trainer_explanation(precomputed, regimes, strategies, curr
 | **Bias** | {bias_desc.upper()} |
 | **Market Stage** | {market_stage} |
 | **Trend/Setup/Entry** | {d_regime} → {setup_regime} → {entry_regime} |
-| **Current Price** | {daily_close if daily_close else current_price} |
-| **ATR (Volatility)** | {daily_atr} ({atr_pct:.2f}%) |
+| **Current Price** | {current_price:.2f} |
+| **ATR (Volatility)** | {daily_atr:.2f if daily_atr else 'N/A'} ({daily_atr_pct:.2f}%) |
+| **Volatility Regime** | {volatility_badge} |
 
 ---
 
 📐 **DARVAS BOX** (Institutional Structure)
-  • Upper (Resistance): {darvas_upper if darvas_upper else 'N/A'}
-  • Lower (Support): {darvas_lower if darvas_lower else 'N/A'}
-  • Mid (Pivot): {darvas_mid if darvas_mid else 'N/A'}
+  • Upper (Resistance): {darvas_upper:.2f if darvas_upper else 'N/A'}
+  • Lower (Support): {darvas_lower:.2f if darvas_lower else 'N/A'}
+  • Mid (Pivot): {darvas_mid:.2f if darvas_mid else 'N/A'}
   • State: {darvas_state.upper() if darvas_state else 'N/A'}
-  • Strength: {darvas_strength if darvas_strength else 'N/A'}/10
+  • Strength: {darvas_strength:.1f}/10 if darvas_strength else 'N/A'}
 
 ---
 
-{bb_section if bb_section else '📊 **BOLLINGER BANDS**: No data available'}
+⚠️ **RSI DIVERGENCE** (Early Warning)
+{rsi_text}
 
 ---
 
-{fib_section if fib_section else '📐 **FIBONACCI**: No levels available'}
-
----
-
-{rsi_section if rsi_section else '⚠️ **RSI DIVERGENCE**: None detected'}
-
----
-
-{gann_section if gann_section else '📐 **GANN SIGNALS**: None detected'}
-
----
-
-{ob_section if ob_section else '🏦 **ORDER BLOCKS**: None near current price'}
-
----
-
-{fo_section if fo_section else '📊 **F&O METRICS**: Not available for this symbol'}
+📐 **GANN SIGNALS**
+{gann_text}
 
 ---
 
 🎯 **TRADING STRATEGY**
 
-**Direction:** {direction.upper()} bias
+**Direction:** {direction} bias
 
 **Primary Strategy ({strategy_a_type}):**
-- Conviction: {strategy_a_conviction}
 - Focus on {strategy_a_type.lower()} opportunities
 
 **Secondary Strategy ({strategy_b_type}):**
-- Conviction: {strategy_b_conviction}
 - Use at range extremes
 
 ---
@@ -988,17 +932,15 @@ def generate_fallback_trainer_explanation(precomputed, regimes, strategies, curr
 {volatility_advice}
 
 **Position Sizing:** Adjust based on volatility regime
-**Invalidation:** Close positions if price breaks key structure levels
 
 ---
 
 💡 **TAKEAWAY**
 
-{direction.upper()} bias is active. Focus on {strategy_a_type.lower()} trades with clear risk parameters.
-This analysis is based on ACTUAL verified data from your system.
+{direction} bias is active. Focus on {strategy_a_type.lower()} trades with clear risk parameters.
 
 ---
-*AI service is not utilized.*
+*AI service temporarily unavailable. Analysis based on computed data.*
 """
     
     return explanation
