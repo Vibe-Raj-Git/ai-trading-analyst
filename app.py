@@ -6,17 +6,90 @@ import traceback
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
-#from openai import OpenAI
 from flask import Flask, render_template, request, jsonify, session, send_file
-#import httpx
 import time
 import google.generativeai as genai
 
 # Import your trading modules
 from new_tradingCopy import analyze, compute_precomputed
 
-# Load environment variables
+# ============================================
+# CREATE FLASK APP FIRST
+# ============================================
+app = Flask(__name__, 
+            static_folder='static',
+            template_folder='templates')
+
+app.secret_key = os.environ.get('SECRET_KEY', 'your-secret-key-here-change-in-production')
+
+# ============================================
+# IMPORT FLASK-LOGIN AFTER APP CREATION
+# ============================================
+from flask_login import LoginManager, login_required, current_user
+
+# ============================================
+# IMPORT AUTH MODULES (after app creation to avoid circular imports)
+# ============================================
+from auth import auth_bp, init_user_db, bcrypt, mail, User
+from admin import admin_bp
+
+# ============================================
+# INITIALIZE EXTENSIONS
+# ============================================
+bcrypt.init_app(app)
+mail.init_app(app)
+
+# ============================================
+# INITIALIZE LOGIN MANAGER
+# ============================================
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
+login_manager.login_message = 'Please log in to access this page.'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
+# ============================================
+# REGISTER BLUEPRINTS
+# ============================================
+app.register_blueprint(auth_bp)
+app.register_blueprint(admin_bp)
+
+# ✅ ADD THIS DEBUG - List all registered routes
+print("\n" + "=" * 60)
+print("REGISTERED ROUTES:")
+print("=" * 60)
+for rule in app.url_map.iter_rules():
+    print(f"  {rule.endpoint}: {rule.rule}")
+print("=" * 60 + "\n")
+
+# ============================================
+# CONTEXT PROCESSOR (makes current_user available in templates)
+# ============================================
+@app.context_processor
+def inject_user():
+    return dict(current_user=current_user)
+
+# ============================================
+# INITIALIZE USER DATABASE
+# ============================================
+init_user_db()
+
+# ============================================
+# LOAD ENVIRONMENT VARIABLES
+# ============================================
 load_dotenv()
+
+# ============================================
+# YOUR EXISTING ROUTES
+# ============================================
+@app.route('/')
+@login_required
+def index():
+    """Main page - requires login"""
+    return render_template('index.html')
 
 # Remove proxy environment variables to avoid OpenAI client issues
 #for proxy_var in ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy']:
@@ -44,12 +117,6 @@ logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 # Keep your own debug logs
 logger.setLevel(logging.DEBUG)
-
-# Flask app initialization
-app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", os.urandom(24))
-app.config['JSON_AS_ASCII'] = False
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # Constants
 IST = ZoneInfo("Asia/Kolkata")
@@ -4262,11 +4329,6 @@ ATR is {daily_ind.get('D_ATR14', 'N/A')}. Keep stops appropriate.
 # ======================================================
 # Flask Routes
 # ======================================================
-@app.route('/')
-def index():
-    """Main page"""
-    return render_template('index.html')
-
 @app.route('/analyze', methods=['POST'])
 def analyze_symbol():
     """Run analysis for a symbol"""
