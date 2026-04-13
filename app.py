@@ -770,17 +770,217 @@ def extract_gann_metrics_for_anchor(gann_metrics: dict) -> str:
     gann_anchor += "\n"
     return gann_anchor
 
-return generate_fallback_trainer_explanation(
-    precomputed=precomputed,
-    regimes=regimes,
-    strategies={},
-    current_price=current_price,
-    supports=[],
-    resistances=[],
-    market_stage=market_stage,
-    clean_output=clean_output,
-    raw_output=raw_output  # ✅ CRITICAL - must be passed
-)
+def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, clean_output=None, raw_output=None):
+    """
+    Generate Trainer explanation using extract_verified_prices() rich data.
+    """
+    
+    # ========== USE extract_verified_prices TO GET RICH DATA ==========
+    verified_anchor = ""
+    if raw_output:
+        verified_anchor = extract_verified_prices(raw_output)
+        print(f"DEBUG: extract_verified_prices produced {len(verified_anchor)} chars")
+    
+    # If verified_anchor is empty, fall back to precomputed
+    if not verified_anchor or len(verified_anchor) < 500:
+        print("DEBUG WARNING: verified_anchor empty, using precomputed fallback")
+        return generate_precomputed_fallback(precomputed, regimes, strategies, current_price, market_stage)
+    
+    # ========== EXTRACT DATA FROM VERIFIED ANCHOR ==========
+    
+    def _extract(label):
+        pattern = rf"{re.escape(label)}[:\s]+([\d\.\-]+)"
+        match = re.search(pattern, verified_anchor)
+        return match.group(1) if match else None
+    
+    def _extract_text(label):
+        pattern = rf"{re.escape(label)}[:\s]+([A-Za-z0-9_\-]+)"
+        match = re.search(pattern, verified_anchor)
+        return match.group(1) if match else None
+    
+    # Extract everything from verified anchor
+    daily_close = _extract("Daily Close")
+    daily_atr = _extract("ATR")
+    darvas_upper = _extract("Darvas Box Upper")
+    darvas_lower = _extract("Darvas Box Lower")
+    darvas_mid = _extract("Darvas Box Mid")
+    darvas_state = _extract_text("Darvas Box State")
+    darvas_strength = _extract("Darvas Strength")
+    
+    # Get regimes from anchor
+    d_regime = _extract_text("Daily Regime") or regimes.get("Trend_Regime", "Unknown")
+    setup_regime = _extract_text("30M Regime") or regimes.get("Setup_Regime", "Unknown")
+    entry_regime = _extract_text("5M Regime") or regimes.get("Entry_Regime", "Unknown")
+    
+    # Market Stage
+    if market_stage is None:
+        market_stage = _extract_text("Market Stage (Trend TF)")
+    if market_stage is None:
+        if d_regime == "Bullish":
+            market_stage = "Advancing"
+        elif d_regime == "Bearish":
+            market_stage = "Declining"
+        else:
+            market_stage = "Accumulation"
+    
+    # Extract sections from verified_anchor
+    def _extract_section(section_name):
+        pattern = rf"(={80}.*?{re.escape(section_name)}.*?)(?=={80}|\Z)"
+        match = re.search(pattern, verified_anchor, re.DOTALL)
+        if match:
+            return match.group(1)
+        return ""
+    
+    # Get all rich sections
+    rsi_section = _extract_section("RSI DIVERGENCE")
+    gann_section = _extract_section("GANN METRICS")
+    fo_section = _extract_section("OPTIONS & FUTURES METRICS")
+    darvas_section = _extract_section("DARVAS BOX")
+    bb_section = _extract_section("BOLLINGER BANDS")
+    fib_section = _extract_section("FIBONACCI LEVELS")
+    
+    # ATR percentage
+    atr_pct = 0
+    if daily_atr and daily_close:
+        try:
+            atr_pct = (float(daily_atr) / float(daily_close)) * 100
+        except:
+            pass
+    
+    # Volatility advice
+    if atr_pct > 2:
+        volatility_advice = "⚠️ HIGH VOLATILITY - Widen stops by 50%, reduce position size"
+    elif atr_pct < 1:
+        volatility_advice = "📊 LOW VOLATILITY - Use tighter stops (1-1.5x ATR)"
+    else:
+        volatility_advice = "📈 NORMAL VOLATILITY - Standard position sizing (2x ATR stops)"
+    
+    # Strategy types
+    strategy_a_type = strategies.get("A", {}).get("type", "Pullback")
+    strategy_b_type = strategies.get("B", {}).get("type", "Range-Edge Fade")
+    
+    # Direction
+    if d_regime == "Bullish":
+        direction = "LONG"
+    elif d_regime == "Bearish":
+        direction = "SHORT"
+    else:
+        direction = "NEUTRAL"
+    
+    # ========== BUILD EXPLANATION USING RICH DATA ==========
+    
+    explanation = f"""
+📊 **MARKET OVERVIEW**
+
+| Metric | Value |
+|--------|-------|
+| **Bias** | {d_regime.upper()} |
+| **Market Stage** | {market_stage} |
+| **Trend/Setup/Entry** | {d_regime} → {setup_regime} → {entry_regime} |
+| **Current Price** | {daily_close if daily_close else current_price} |
+| **ATR (Volatility)** | {daily_atr} ({atr_pct:.2f}%) |
+| **Volatility** | {volatility_advice} |
+
+---
+
+{darvas_section if darvas_section else '📐 **DARVAS BOX**: No data available'}
+
+---
+
+{bb_section if bb_section else '📊 **BOLLINGER BANDS**: No data available'}
+
+---
+
+{fib_section if fib_section else '📐 **FIBONACCI**: No levels available'}
+
+---
+
+{rsi_section if rsi_section else '⚠️ **RSI DIVERGENCE**: None detected'}
+
+---
+
+{gann_section if gann_section else '📐 **GANN SIGNALS**: None detected'}
+
+---
+
+{fo_section if fo_section else '📊 **F&O METRICS**: Not available'}
+
+---
+
+🎯 **TRADING STRATEGY**
+
+**Direction:** {direction} bias
+
+**Primary Strategy ({strategy_a_type}):**
+- Focus on {strategy_a_type.lower()} opportunities
+
+**Secondary Strategy ({strategy_b_type}):**
+- Use at range extremes
+
+---
+
+⚠️ **RISK MANAGEMENT**
+
+{volatility_advice}
+
+---
+
+💡 **TAKEAWAY**
+
+{direction} bias is active. Focus on {strategy_a_type.lower()} trades with clear risk parameters.
+
+---
+*AI service temporarily unavailable. Analysis based on verified data.*
+"""
+    
+    return explanation
+
+
+def generate_precomputed_fallback(precomputed, regimes, strategies, current_price, market_stage):
+    """Simple fallback when extract_verified_prices returns nothing"""
+    
+    daily_ind = precomputed.get("DAILY", {}).get("indicators", {})
+    daily_atr = daily_ind.get("D_ATR14", "N/A")
+    d_regime = regimes.get("Trend_Regime", "Unknown")
+    
+    atr_pct = 0
+    if daily_atr != "N/A" and current_price:
+        try:
+            atr_pct = (float(daily_atr) / float(current_price)) * 100
+        except:
+            pass
+    
+    if atr_pct > 2:
+        volatility_advice = "⚠️ HIGH VOLATILITY"
+    elif atr_pct < 1:
+        volatility_advice = "📊 LOW VOLATILITY"
+    else:
+        volatility_advice = "📈 NORMAL VOLATILITY"
+    
+    return f"""
+📊 **MARKET OVERVIEW**
+
+| Metric | Value |
+|--------|-------|
+| **Bias** | {d_regime.upper()} |
+| **Current Price** | {current_price:.2f} |
+| **ATR** | {daily_atr} ({atr_pct:.2f}%) |
+| **Volatility** | {volatility_advice} |
+
+---
+
+⚠️ **Limited Data Available**
+
+The full verified data anchor could not be generated. This may be a temporary issue.
+
+**Trading Guidance:**
+- Use standard risk management (2x ATR stops)
+- Wait for clearer signals
+- Check API connectivity
+
+---
+*Limited data mode. AI service temporarily unavailable.*
+"""
 
 def compute_quick_action(mode: str, regimes: dict | None, darvas_state: str | None = None):
     """
@@ -1123,6 +1323,7 @@ def generate_trainer_explanation(clean_output, raw_output, persona_key, is_index
             supports=[],
             resistances=[],
             market_stage=market_stage,
+            clean_output=clean_output,
             raw_output=raw_output  # ✅ Pass raw output, not cleaned
         )
     # ========== DEBUG: Check gann_metrics received ==========
@@ -2344,7 +2545,9 @@ Here is the analysis:
             current_price=current_price,
             supports=[],
             resistances=[],
-            market_stage=market_stage
+            market_stage=market_stage,
+            clean_output=clean_output,
+            raw_output=raw_output
         )
 
 def extract_balanced_json(text):
