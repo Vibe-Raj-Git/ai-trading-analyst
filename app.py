@@ -771,16 +771,40 @@ def extract_gann_metrics_for_anchor(gann_metrics: dict) -> str:
     return gann_anchor
 
 def generate_fallback_trainer_explanation(precomputed, regimes, strategies, current_price, supports, resistances, market_stage=None, raw_output=None):
-    """
-    Generate Trainer explanation using actual precomputed data.
-    NO LLM CALL - pure template-based with REAL data from extract_verified_prices.
-    """
     
-    # ========== USE extract_verified_prices TO GET ALL DATA ==========
+    # ========== DEBUG: Check raw_output content ==========
+    print("=" * 80)
+    print("DEBUG: raw_output received in fallback - first 2000 chars:")
+    print("=" * 80)
+    if raw_output:
+        print(raw_output[:2000])
+        print("=" * 80)
+        print(f"DEBUG: raw_output length: {len(raw_output)}")
+        
+        # Check for specific patterns
+        print("DEBUG: Checking for key patterns in raw_output:")
+        print(f"  Contains 'Darvas': {'Darvas' in raw_output}")
+        print(f"  Contains 'DARVAS': {'DARVAS' in raw_output}")
+        print(f"  Contains 'upper': {'upper' in raw_output}")
+        print(f"  Contains 'lower': {'lower' in raw_output}")
+        print(f"  Contains 'GANN': {'GANN' in raw_output}")
+        print(f"  Contains 'RSI Divergence': {'RSI Divergence' in raw_output}")
+        print(f"  Contains 'ATR': {'ATR' in raw_output}")
+        print("=" * 80)
+    else:
+        print("DEBUG WARNING: raw_output is None or empty!")
+    
+    # Then call extract_verified_prices
     verified_anchor = ""
     if raw_output:
         verified_anchor = extract_verified_prices(raw_output)
-        print(f"DEBUG: extract_verified_prices produced {len(verified_anchor)} chars of data")
+        print(f"DEBUG: extract_verified_prices produced {len(verified_anchor)} chars")
+        if verified_anchor:
+            print(f"DEBUG: verified_anchor preview: {verified_anchor[:500]}")
+    else:
+        print("DEBUG WARNING: raw_output not provided!")
+    
+    # ... rest of your function
     
     # Extract values from verified anchor (or fall back to precomputed/regimes)
     def _extract(label, default=None):
