@@ -106,7 +106,7 @@
             position: relative;
             z-index: 1;
             border: 1px solid rgba(255, 107, 53, 0.3);
-            overflow: hidden;
+            overflow: visible;
         }
 
         /* Theme Toggle */
@@ -135,7 +135,6 @@
             padding: 28px 32px;
             background: var(--gradient-primary);
             border-radius: 28px 28px 0 0;
-            text-align: center;
             position: relative;
             overflow: hidden;
         }
@@ -689,19 +688,91 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #ff4500, #ff6b35);
         }
+        /* CRITICAL FIX: Allow dropdown to show above header */
+        .main-container,
+        .header,
+        .header > div,
+        .header > div > div {
+            overflow: visible !important;
+        }
+
+        .dropdown-menu,
+        #adminMenu {
+            position: absolute !important;
+            z-index: 9999 !important;
+        }
+
+        .dropdown {
+            position: relative !important;
+            z-index: 10000 !important;
+        }
     </style>
 </head>
 <body>
     <div class="main-container">
-        <!-- Header -->
+        <!-- Header with User Menu -->
         <div class="header">
-            <div>
-                <h1>
-                    <i class="fas fa-chart-line"></i> AI Deep Research Trading Analyst by Rajarshi Pathak
-                </h1>
-                <small>Multi-Timeframe Analysis with F&O Metrics, GANN, Market Stages, Dow Theory, and Darvas Box</small>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <div>
+                    <h1>
+                        <i class="fas fa-chart-line"></i> AI Deep Research Trading Analyst by Rajarshi Pathak
+                    </h1>
+                    <small>Multi-Timeframe Analysis with F&O Metrics, GANN, Market Stages, Dow Theory, and Darvas Box</small>
+                </div>
+                
+                <div style="position: relative; display: inline-block; z-index: 2000;">
+                    <button class="btn btn-light" type="button" 
+                            style="border-radius: 50px; padding: 8px 20px; cursor: pointer; background: white; border: 1px solid #ddd;"
+                            onclick="toggleAdminMenu()">
+                        <i class="fas fa-user-circle me-2"></i> {{ current_user.username }}
+                        <i class="fas fa-chevron-down ms-2" style="font-size: 12px;"></i>
+                    </button>
+                    <div id="adminMenu" style="position: absolute; right: 0; top: 100%; margin-top: 8px; 
+                                background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
+                                min-width: 220px; display: none; z-index: 9999; overflow: hidden;">
+                        <a href="{{ url_for('auth.profile') }}" style="display: block; padding: 12px 20px; text-decoration: none; color: #333;">
+                            <i class="fas fa-user me-2" style="color: #ff6b35;"></i> Profile
+                        </a>
+                        {% if current_user.role == 'admin' %}
+                        <div style="height: 1px; background: #e5e7eb;"></div>
+                        <a href="{{ url_for('admin.dashboard') }}" style="display: block; padding: 12px 20px; text-decoration: none; color: #333;">
+                            <i class="fas fa-tachometer-alt me-2" style="color: #ff6b35;"></i> Admin Dashboard
+                        </a>
+                        <a href="{{ url_for('admin.users') }}" style="display: block; padding: 12px 20px; text-decoration: none; color: #333;">
+                            <i class="fas fa-users me-2" style="color: #ff6b35;"></i> Manage Users
+                        </a>
+                        <a href="{{ url_for('admin.activity_log') }}" style="display: block; padding: 12px 20px; text-decoration: none; color: #333;">
+                            <i class="fas fa-history me-2" style="color: #ff6b35;"></i> Activity Log
+                        </a>
+                        {% endif %}
+                        <div style="height: 1px; background: #e5e7eb;"></div>
+                        <a href="{{ url_for('auth.logout') }}" style="display: block; padding: 12px 20px; text-decoration: none; color: #dc3545;">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <script>
+        function toggleAdminMenu() {
+            var menu = document.getElementById('adminMenu');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            var menu = document.getElementById('adminMenu');
+            var button = event.target.closest('[onclick="toggleAdminMenu()"]');
+            if (!button && menu) {
+                menu.style.display = 'none';
+            }
+        });
+        </script>
         
         <div class="row g-0">
             <!-- Sidebar -->
@@ -1215,7 +1286,6 @@
                     document.getElementById('fo_decision_bias').innerHTML = fc.fo_bias;
                     document.getElementById('fo_decision_conviction').innerHTML = fc.fo_conviction || '--';
                     
-                    // ✅ ADD THIS - Update risk
                     const riskEl = document.getElementById('fo_decision_risk');
                     if (riskEl) {
                         if (fc.fo_no_trade === true || fc.fo_bias === 'no_trade') {
@@ -1329,42 +1399,56 @@
             }
         });
     </script>
-<!-- Force FO Decision update -->
-<script>
-    // Ensure FO Decision updates correctly
-    window.updateFODecision = function() {
-        const fc = window.currentAnalysis?.fo_context;
-        if (!fc) return;
-        
-        const riskEl = document.getElementById('fo_decision_risk');
-        const biasEl = document.getElementById('fo_decision_bias');
-        const convictionEl = document.getElementById('fo_decision_conviction');
-        const foDiv = document.getElementById('foDecision');
-        
-        if (biasEl) biasEl.textContent = fc.fo_bias || '--';
-        if (convictionEl) convictionEl.textContent = fc.fo_conviction || '--';
-        if (riskEl) {
-            if (fc.fo_no_trade === true || fc.fo_bias === 'no_trade') {
-                riskEl.textContent = 'No Trade';
-            } else if (fc.fo_risk_profile) {
-                riskEl.textContent = fc.fo_risk_profile;
-            } else {
-                riskEl.textContent = 'Moderate';
-            }
-        }
-        if (foDiv) foDiv.style.display = 'block';
-    };
     
-    // Hook into analysis completion
-    const originalRunAnalysis = window.runAnalysis;
-    if (originalRunAnalysis) {
-        window.runAnalysis = async function() {
-            const result = await originalRunAnalysis();
-            setTimeout(window.updateFODecision, 100);
-            return result;
+    <!-- Force FO Decision update -->
+    <script>
+        // Ensure FO Decision updates correctly
+        window.updateFODecision = function() {
+            const fc = window.currentAnalysis?.fo_context;
+            if (!fc) return;
+            
+            const riskEl = document.getElementById('fo_decision_risk');
+            const biasEl = document.getElementById('fo_decision_bias');
+            const convictionEl = document.getElementById('fo_decision_conviction');
+            const foDiv = document.getElementById('foDecision');
+            
+            if (biasEl) biasEl.textContent = fc.fo_bias || '--';
+            if (convictionEl) convictionEl.textContent = fc.fo_conviction || '--';
+            if (riskEl) {
+                if (fc.fo_no_trade === true || fc.fo_bias === 'no_trade') {
+                    riskEl.textContent = 'No Trade';
+                } else if (fc.fo_risk_profile) {
+                    riskEl.textContent = fc.fo_risk_profile;
+                } else {
+                    riskEl.textContent = 'Moderate';
+                }
+            }
+            if (foDiv) foDiv.style.display = 'block';
         };
-    }
+        
+        // Hook into analysis completion
+        const originalRunAnalysis = window.runAnalysis;
+        if (originalRunAnalysis) {
+            window.runAnalysis = async function() {
+                const result = await originalRunAnalysis();
+                setTimeout(window.updateFODecision, 100);
+                return result;
+            };
+        }
     </script>
 
+    <!-- Bootstrap JS for dropdown -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Manually initialize all dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all dropdown toggles
+            var dropdownToggleList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'));
+            dropdownToggleList.map(function(dropdownToggleEl) {
+                return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+            console.log('Dropdowns initialized:', dropdownToggleList.length);
+        });
+    </script>
 </body>
 </html>
