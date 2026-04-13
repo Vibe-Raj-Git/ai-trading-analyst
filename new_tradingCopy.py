@@ -9736,6 +9736,8 @@ def analyze(
     # Fallbacks if something is missing
     daily_block = precomputed.get("DAILY", {}) or {}
     weekly_block = precomputed.get("WEEKLY", {}) or {}
+    weekly_ind = weekly_block.get("indicators", {}) or {}
+    weekly_ms = weekly_block.get("market_structure", {}) or {}
     monthly_block = precomputed.get("MONTHLY", {}) or {}
 
     # Frames
@@ -9925,7 +9927,9 @@ def analyze(
     d_regime = daily_ind.get("D_Regime") or daily_ind.get("Regime")
 
     # From WEEKLY block
+    # From WEEKLY block
     weekly_ind = weekly_block.get("indicators", {}) or {}
+    weekly_ms = weekly_block.get("market_structure", {}) or {}  # ✅ ADD THIS
     w_regime = weekly_ind.get("W_Regime") or weekly_ind.get("Regime")
 
     # From 4H block
