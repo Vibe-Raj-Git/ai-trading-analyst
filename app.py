@@ -901,7 +901,7 @@ def generate_fallback_trainer_explanation(precomputed, regimes, strategies, curr
   • Lower (Support): {darvas_lower:.2f if darvas_lower else 'N/A'}
   • Mid (Pivot): {darvas_mid:.2f if darvas_mid else 'N/A'}
   • State: {darvas_state.upper() if darvas_state else 'N/A'}
-  • Strength: {darvas_strength:.1f}/10 if darvas_strength else 'N/A'}
+  • Strength: {darvas_strength:.1f}/10 if darvas_strength else 'N/A'
 
 ---
 
