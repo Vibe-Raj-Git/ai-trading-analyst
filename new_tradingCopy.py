@@ -7728,7 +7728,7 @@ def call_gemini(prompt: str) -> str:
     
     try:
         genai.configure(api_key=GENAI_API_KEY)
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        model = genai.GenerativeModel('gemini-3-flash-preview')
         
         response = model.generate_content(
             prompt,
