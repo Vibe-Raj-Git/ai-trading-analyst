@@ -1257,7 +1257,7 @@
             if (formatted && !formatted.startsWith('<')) formatted = '<p>' + formatted + '</p>';
             explanationDiv.innerHTML = formatted || '<p>Analysis complete. No detailed explanation available.</p>';
             
-            // F&O Context
+            // F&O Context - ONLY show for F&O mode
             if (data.mode === 'F&O' && data.fo_context && Object.keys(data.fo_context).length > 0) {
                 document.getElementById('foContext').style.display = 'block';
                 const fc = data.fo_context;
@@ -1297,6 +1297,9 @@
                         }
                     }
                 }
+            } else {
+                // ✅ ADD THIS - Hide FO context for non-F&O modes
+                document.getElementById('foContext').style.display = 'none';
             }
             
             // Raw Analysis
