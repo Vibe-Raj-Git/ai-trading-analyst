@@ -2633,11 +2633,11 @@ Here is the analysis:
                 print(f"  Total tokens: {total_tokens}")
                 
                 # Optional: Store in session state for UI display
-                st.session_state.token_usage = {
-                    "prompt": prompt_tokens,
-                    "response": candidates_tokens,
-                    "total": total_tokens
-                }
+                #st.session_state.token_usage = {
+                #    "prompt": prompt_tokens,
+                #    "response": candidates_tokens,
+                #    "total": total_tokens
+                #}
             else:
                 print("[TOKEN USAGE - Trainer Gemini] No usage metadata available")
         except AttributeError:
@@ -2645,7 +2645,8 @@ Here is the analysis:
         except Exception as e:
             print(f"[TOKEN USAGE - Trainer Gemini] Error getting token count: {e}")
         # ==================================
-        
+        print(f"[DEBUG] Gemini response received, length: {len(response.text)}")
+        print(f"[DEBUG] Response preview: {response.text[:200]}...")
         return response.text
     except Exception as e:
         print(f"ERROR: Gemini trainer explanation failed: {e}")
