@@ -82,7 +82,116 @@ if (modeSelect && modeInfo) {
     modeSelect.dispatchEvent(new Event('change'));
 }
 
-// Main analysis function
+// ============================================
+// FALLBACK EXPLANATION GENERATOR (NEW)
+// ============================================
+function generateFallbackExplanation(data) {
+    const quick = data.quick_action || { bias: 'WAIT', message: 'Analysis complete' };
+    const regimes = data.regimes || {};
+    const atr = data.atr_metrics || {};
+    
+    return `
+### 1) Big Picture
+${quick.message || 'Market analysis complete.'}
+
+**Market Stage:** ${regimes.Market_Stage || 'Accumulation'}
+**Trend Regime:** ${regimes.Trend_Regime || 'Range'}
+**Setup Regime:** ${regimes.Setup_Regime || 'Range'}
+**Entry Regime:** ${regimes.Entry_Regime || 'Range'}
+**Volatility:** ${atr.atr_display || 'Normal'}
+
+### 2) Action Plan
+- **Direction:** ${quick.bias || 'WAIT'}
+- **Risk Level:** ${atr.volatility_regime === 'high' ? '⚠️ High volatility - reduce position size' : atr.volatility_regime === 'low' ? '📊 Low volatility - standard sizing' : '📈 Normal volatility'}
+
+### 3) Risk Note
+ATR indicates ${atr.volatility_regime || 'normal'} volatility. 
+${atr.volatility_regime === 'high' ? 'Widen stops by 1.5x and reduce position size by 50%.' : 'Use standard position sizing with stops at 1.5x ATR.'}
+
+### 4) Bottom Line
+${quick.bias === 'BUY' ? 'Look for buying opportunities at support levels. Focus on long setups only.' : 
+  quick.bias === 'SELL' ? 'Look for selling opportunities at resistance levels. Focus on short setups only.' : 
+  quick.bias === 'RANGE-BUY' ? 'Range-bound market with bullish tilt. Buy near support, avoid selling.' :
+  quick.bias === 'RANGE-SELL' ? 'Range-bound market with bearish tilt. Sell near resistance, avoid buying.' :
+  'Wait for clearer market direction before entering trades.'}
+`;
+}
+
+// ============================================
+// ENHANCED TRAINER EXPLANATION DISPLAY (UPDATED)
+// ============================================
+function displayTrainerExplanation(explanation, fullData) {
+    const explanationDiv = document.getElementById('trainerExplanation');
+    if (!explanationDiv) return;
+    
+    let rawExplanation = explanation || '';
+    
+    // Debug logging
+    console.log('Raw explanation length:', rawExplanation.length);
+    console.log('Raw explanation preview:', rawExplanation.substring(0, 300));
+    
+    // Check if explanation is valid (not too short and not an error message)
+    if (rawExplanation.length < 50 || 
+        rawExplanation.includes('AI service unavailable') ||
+        rawExplanation.includes('Error calling Gemini') ||
+        rawExplanation.includes('fallback')) {
+        console.warn('Explanation too short or error, using fallback');
+        rawExplanation = generateFallbackExplanation(fullData);
+    }
+    
+    // Enhanced markdown to HTML conversion
+    let formatted = rawExplanation;
+    
+    // Convert markdown formatting
+    formatted = formatted.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Convert headers
+    formatted = formatted.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+    formatted = formatted.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+    formatted = formatted.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+    formatted = formatted.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+    
+    // Convert lists
+    formatted = formatted.replace(/^\s*[-•]\s+(.*$)/gm, '<li>$1</li>');
+    formatted = formatted.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+    formatted = formatted.replace(/^\d+\.\s+(.*$)/gm, '<li>$1</li>');
+    
+    // Convert horizontal rules
+    formatted = formatted.replace(/^---+$/gm, '<hr>');
+    
+    // Convert line breaks
+    formatted = formatted.replace(/\n\n/g, '</p><p>');
+    formatted = formatted.replace(/\n/g, '<br>');
+    
+    // Wrap in paragraphs if needed
+    if (formatted && !formatted.startsWith('<')) {
+        formatted = '<p>' + formatted + '</p>';
+    }
+    
+    // Highlight price levels - make them clickable
+    formatted = formatted.replace(/\b\d{3,}\.\d{2}\b/g, match => 
+        `<span class="price-level" onclick="highlightLevel('${match}')" title="Click to highlight this price level">${match}</span>`);
+    
+    // Highlight percentages
+    formatted = formatted.replace(/\b(\d+\.?\d*)%\b/g, '<strong>$1%</strong>');
+    
+    // Highlight key directional badges
+    formatted = formatted.replace(/\b(BUY|LONG)\b/g, '<span class="badge bg-success">$1</span>');
+    formatted = formatted.replace(/\b(SELL|SHORT)\b/g, '<span class="badge bg-danger">$1</span>');
+    formatted = formatted.replace(/\b(WAIT|NEUTRAL)\b/g, '<span class="badge bg-warning text-dark">$1</span>');
+    formatted = formatted.replace(/\b(RANGE-BUY)\b/g, '<span class="badge bg-info text-dark">$1</span>');
+    formatted = formatted.replace(/\b(RANGE-SELL)\b/g, '<span class="badge bg-secondary">$1</span>');
+    
+    explanationDiv.innerHTML = formatted || '<p>Analysis complete. No detailed explanation available.</p>';
+    console.log('Formatted explanation length:', explanationDiv.innerHTML.length);
+    
+    // Add interactive price levels
+    addInteractiveLevels();
+}
+
+// Main analysis function (UPDATED to pass full data)
 async function runAnalysis() {
     if (!symbolInput) {
         showError('Symbol input not found');
@@ -133,10 +242,16 @@ async function runAnalysis() {
         displayQuickAction(data.quick_action);
         displayRegimeBadges(data.regimes);
         displayKeyMetrics(data);
-        displayTrainerExplanation(data.explanation);
+        
+        // ✅ Pass BOTH explanation AND full data for fallback
+        displayTrainerExplanation(data.explanation, data);
         
         if (data.mode === 'F&O' && data.fo_context && Object.keys(data.fo_context).length > 0) {
             displayFOContext(data.fo_context);
+        } else {
+            // Hide FO context for non-F&O modes
+            const foDiv = document.getElementById('foContext');
+            if (foDiv) foDiv.style.display = 'none';
         }
         
         displayRawAnalysis(data.raw_analysis);
@@ -153,6 +268,10 @@ async function runAnalysis() {
         if (loadingOverlay) loadingOverlay.style.display = 'none';
     }
 }
+
+// ============================================
+// REST OF YOUR EXISTING FUNCTIONS (keep as is)
+// ============================================
 
 // Display key metrics dashboard with enhanced ATR support
 function displayKeyMetrics(data) {
@@ -402,30 +521,6 @@ function displayFOContext(foContextData) {
     foDiv.style.display = 'block';
 }
 
-// Display trainer explanation
-function displayTrainerExplanation(explanation) {
-    const explanationDiv = document.getElementById('trainerExplanation');
-    if (!explanationDiv) return;
-    
-    let formatted = explanation || '';
-    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    formatted = formatted.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-    formatted = formatted.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-    formatted = formatted.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-    formatted = formatted.replace(/^- (.*$)/gm, '<li>$1</li>');
-    formatted = formatted.replace(/^• (.*$)/gm, '<li>$1</li>');
-    formatted = formatted.replace(/(<li>.*?<\/li>\n?)+/g, '<ul>$&</ul>');
-    formatted = formatted.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
-    formatted = formatted.replace(/\n\n/g, '</p><p>');
-    formatted = formatted.replace(/\n/g, '<br>');
-    formatted = formatted.replace(/\b\d{3,}\.\d{2}\b/g, match => 
-        `<span class="price-level" onclick="highlightLevel('${match}')">${match}</span>`);
-    
-    if (formatted && !formatted.startsWith('<')) formatted = '<p>' + formatted + '</p>';
-    explanationDiv.innerHTML = formatted || '<p>Analysis complete. No detailed explanation available.</p>';
-    addInteractiveLevels();
-}
-
 // Add interactive price levels
 function addInteractiveLevels() {
     const explanationDiv = document.getElementById('trainerExplanation');
@@ -628,13 +723,20 @@ if (!document.querySelector('#dynamic-styles')) {
         .volatility-low { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
         .volatility-normal { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
         .volatility-high { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin: 0 2px; }
+        .bg-success { background: #10b981; color: white; }
+        .bg-danger { background: #ef4444; color: white; }
+        .bg-warning { background: #f59e0b; color: #333; }
+        .bg-info { background: #00d4ff; color: #333; }
+        .bg-secondary { background: #6b7280; color: white; }
+        .text-dark { color: #333; }
     `;
     document.head.appendChild(style);
 }
 
 // Export functions for global access
 window.runAnalysis = runAnalysis;
-window.displayFOContext = displayFOContext;  // ✅ ADD THIS LINE
+window.displayFOContext = displayFOContext;
 window.toggleRawAnalysis = toggleRawAnalysis;
 window.exportPDF = exportPDF;
 window.copyToClipboard = copyToClipboard;
