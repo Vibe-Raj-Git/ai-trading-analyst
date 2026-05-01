@@ -736,7 +736,8 @@ body::before {
     
     .trainer-content {
         padding: 16px;
-        max-height: 500px;
+        max-height: none !important;
+        overflow-y: visible !important;
     }
     
     .trainer-content h1 {
