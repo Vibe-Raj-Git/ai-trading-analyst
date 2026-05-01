@@ -670,6 +670,20 @@
             .metrics-grid {
                 grid-template-columns: 1fr;
             }
+            /* ✅ ADD THIS - Fix mobile truncation */
+            .trainer-content {
+                max-height: none !important;
+                overflow-y: visible !important;
+            }
+            
+            /* Also ensure card doesn't clip content */
+            .card {
+                overflow: visible !important;
+            }
+            
+            .card-body {
+                overflow: visible !important;
+            }
         }
 
         /* Animations */
